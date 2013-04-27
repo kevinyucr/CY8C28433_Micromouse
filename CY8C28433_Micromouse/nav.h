@@ -9,4 +9,8 @@
 void Nav_Init(void);
 void Nav_Update(void);
 
+// Nav behaiviors
+void Nav_CommandListFollower(char list[], char count);
+void Nav_BasicWander1(void);
+
 #endif
