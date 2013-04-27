@@ -9,12 +9,12 @@
 // milliseconds
 #define SCHED_PERIOD_ADC    2  // Can reduce to 1 ms if needed. Sensors can settle fast enough
 #define SCHED_PERIOD_MOTOR  5
-#define SCHED_PERIOD_I2C    32
+#define SCHED_PERIOD_DEBUG  32
 #define SCHED_PERIOD_MOTION 20
 
 #define SCHED_RUN_ADC    0x01
 #define SCHED_RUN_MOTOR  0x02
-#define SCHED_RUN_I2C    0x04
+#define SCHED_RUN_DEBUG  0x04
 #define SCHED_RUN_MOTION 0x08
 
 void Sched_Init(void);

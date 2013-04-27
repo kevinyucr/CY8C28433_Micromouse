@@ -1,16 +1,5 @@
 #include "ui.h"
 
-struct T_I2C_Regs
-{
-    int val0;
-    int val1;
-    int val2;
-	int val3;
-	char bar0;
-	char bar1;
-	char bar2;
-} I2C_Regs;
-
 void LED_Init(void)
 {
 	LED_All_Off();
@@ -24,25 +13,31 @@ void LED_ShowWalls(void)
 	if (ADC_FilteredRightWallExists) LED_Right_On();
 }
 				
-void I2C_Init(void)
+void Debug_Init(void)
 {
-	EzI2Cs_SetRamBuffer(sizeof(I2C_Regs), 0, (char*)(&I2C_Regs));
-	EzI2Cs_SetAddr(I2C_SLAVE_ADDRESS);
-	EzI2Cs_Start();  // Turn on I2C
+	TX8_BT_Start(TX8_BT_PARITY_NONE);
+	
 }
 
-void I2C_Update(void)
+void Debug_Update(void)
 {
+	int debug_regs[5];
+	char str[7];
+	unsigned char i;
+	
 	M8C_DisableGInt;
-	
-	I2C_Regs.val0 = encoderCurrentCount.left;
-	I2C_Regs.val1 = encoderCurrentCount.right;
-	I2C_Regs.val2 = adcIRFront;
-	I2C_Regs.val3 = adcIRRight;
-	
-	I2C_Regs.bar0 = (char)(adcIRLeft / 32);
-	I2C_Regs.bar1 = (char)(adcIRFront / 32);
-	I2C_Regs.bar2 = (char)(adcIRRight / 32);
-	
+	debug_regs[0] = encoderCurrentCount.left;
+	debug_regs[1] = encoderCurrentCount.right;
+	debug_regs[2] = adcIRFront;
+	debug_regs[3] = adcIRLeft;
+	debug_regs[4] = adcIRRight;
 	M8C_EnableGInt;
+	
+	for (i = 0; i < 5; ++i)
+	{
+		itoa(str, debug_regs[i], 10);
+		TX8_BT_PutString(str);
+		TX8_BT_PutChar(' ');
+	}
+	TX8_BT_PutCRLF();
 }

@@ -6,7 +6,6 @@
 
 #include "PSoCGPIOINT.h"
 #include "Counter16_Tick.h"
-#include "EzI2Cs.h"
 #include "PWM8_LeftFwd.h"
 #include "PWM8_LeftRev.h"
 #include "PWM8_Pump.h"
@@ -14,5 +13,6 @@
 #include "PWM8_RightRev.h"
 #include "SAR10.h"
 #include "SleepTimer.h"
+#include "TX8_BT.h"
 
 #endif

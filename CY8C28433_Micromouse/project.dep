@@ -1,8 +1,11 @@
 # DO NOT DELETE
-./obj/adc.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/adc.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -17,10 +20,13 @@
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8ssc.inc\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\lib\GLOBAL~1.INC\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
-./obj/encoder.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/encoder.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -30,10 +36,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/main.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/main.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -43,10 +52,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/maze.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/maze.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -56,10 +68,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/motion.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/motion.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -69,10 +84,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/motor.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/motor.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -82,10 +100,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/nav.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/nav.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -95,10 +116,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/sched.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/sched.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -108,10 +132,13 @@
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\nav.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\sched.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\ui.h
-./obj/ui.o :  ./lib/COUNTE~1.H ./lib/EzI2Cs.h ./lib/PSoCAPI.h\
-   ./lib/PSOCGP~1.H ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H\
-   ./lib/PWM8_R~1.H ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H\
+./obj/ui.o :  ./lib/COUNTE~1.H ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
+   ./lib/PWM8_L~1.H ./lib/PWM8_L~2.H ./lib/PWM8_P~1.H ./lib/PWM8_R~1.H\
+   ./lib/PWM8_R~2.H ./lib/SAR10.h ./lib/SLEEPT~1.H ./lib/TX8_BT.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/_const.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/limits.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/stdlib.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\MICROM~1.H\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\adc.h\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\encoder.h\
@@ -125,12 +152,6 @@
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
 ./lib/obj/counter16_tickint.o :  ./lib/COUNTE~1.INC\
-   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
-   C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
-./lib/obj/ezi2cs.o :  ./lib/EzI2Cs.inc ./lib/PSOCGP~1.INC\
-   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
-   C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
-./lib/obj/ezi2csint.o :  ./lib/EzI2Cs.inc\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
 ./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
@@ -182,3 +203,10 @@
 ./lib/obj/sleeptimerint.o :  ./lib/SLEEPT~1.INC\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
    C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
+./lib/obj/tx8_bt.o :  ./lib/TX8_BT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
+   C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
+./lib/obj/tx8_btint.o :  ./lib/TX8_BT.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1/m8c.inc\
+   C:\Users\Kevin\Dropbox\PSOCDE~1\CY314B~1\CY8C28~1\memory.inc
+./lib/obj/tx8_btplus.o : 

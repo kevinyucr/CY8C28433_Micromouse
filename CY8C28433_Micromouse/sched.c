@@ -2,7 +2,7 @@
 
 char _schedTimerAdc;
 char _schedTimerMotor;
-char _schedTimerI2C;
+char _schedTimerDebug;
 char _schedTimerMotion;
 
 char _schedQueue;
@@ -12,7 +12,7 @@ void Sched_Init(void)
 {
 	_schedTimerAdc    = 0;
 	_schedTimerMotor  = 0;
-	_schedTimerI2C    = 0;
+	_schedTimerDebug  = 0;
 	_schedTimerMotion = 0;
 	
 	_schedQueue = 0;
@@ -50,10 +50,10 @@ void Sched_RunQueue(void)
 			// Motor module is scheduled to run this cycle
 			Motor_Update();
 		}
-		if (_schedCycleQueue & SCHED_RUN_I2C)
+		if (_schedCycleQueue & SCHED_RUN_DEBUG)
 		{
 			// I2C module is scheduled to run this cycle
-			I2C_Update();
+			Debug_Update();
 		}
 		if (_schedCycleQueue & SCHED_RUN_MOTION)
 		{
@@ -78,10 +78,10 @@ void TICK_ISR(void)
 		_schedTimerMotor = (SCHED_PERIOD_MOTOR);
 	}
 	
-	if (_schedTimerI2C == 0)
+	if (_schedTimerDebug == 0)
 	{
-		_schedQueue |= SCHED_RUN_I2C;
-		_schedTimerI2C = (SCHED_PERIOD_I2C);
+		_schedQueue |= SCHED_RUN_DEBUG;
+		_schedTimerDebug = (SCHED_PERIOD_DEBUG);
 	}
 	
 	if (_schedTimerMotion == 0)
@@ -92,6 +92,6 @@ void TICK_ISR(void)
 	
 	_schedTimerAdc --;
 	_schedTimerMotor --;
-	_schedTimerI2C --;
+	_schedTimerDebug --;
 	_schedTimerMotion --;
 }

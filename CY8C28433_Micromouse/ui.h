@@ -4,7 +4,9 @@
 #include <m8c.h>        // part specific constants and macros
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include "PSoCGPIOINT.h"
+#include "stdlib.h"
 #include "MicromouseModules.h"
+
 
 #define LED_Left_On()  (LED_Left_Data_ADDR  &= ~LED_Left_MASK)
 #define LED_Left_Off()   (LED_Left_Data_ADDR  |=  LED_Left_MASK)
@@ -25,9 +27,7 @@
 void LED_Init(void);	
 void LED_ShowWalls(void);
 
-#define I2C_SLAVE_ADDRESS 4
-
-void I2C_Init(void);
-void I2C_Update(void);
+void Debug_Init(void);
+void Debug_Update(void);
 
 #endif

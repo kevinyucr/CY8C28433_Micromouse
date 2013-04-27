@@ -16,7 +16,6 @@ LoadConfigTBL_cy8c28433_micromouse_Bank0:
 	db		27h, 00h		;Counter16_Tick_CONTROL_MSB_REG(DBC01CR0)
 	db		25h, 01h		;Counter16_Tick_PERIOD_MSB_REG(DBC01DR1)
 	db		26h, 00h		;Counter16_Tick_COMPARE_MSB_REG(DBC01DR2)
-;  Instance name EzI2Cs, User Module EzI2Cs
 ;  Instance name PWM8_LeftFwd, User Module PWM8
 ;       Instance name PWM8_LeftFwd, Block Name PWM8(DCC23)
 	db		4fh, 00h		;PWM8_LeftFwd_CONTROL_REG(DCC23CR0)
@@ -44,6 +43,11 @@ LoadConfigTBL_cy8c28433_micromouse_Bank0:
 	db		42h, 00h		;PWM8_RightRev_COMPARE_REG(DBC20DR2)
 ;  Instance name SAR10, User Module SAR10
 ;  Instance name SleepTimer, User Module SleepTimer
+;  Instance name TX8_BT, User Module TX8
+;       Instance name TX8_BT, Block Name TX8(DCC03)
+	db		2fh, 00h		;TX8_BT_CONTROL_REG  (DCC03CR0)
+	db		2dh, 00h		;TX8_BT_TX_BUFFER_REG(DCC03DR1)
+	db		2eh, 00h		;TX8_BT_(DCC03DR2)
 ;  Global Register values Bank 0
 	db		6ah, 00h		; ADCDataHigh register (SADC_DH)
 	db		6bh, 00h		; ADCDataLow register (SADC_DL)
@@ -65,7 +69,7 @@ LoadConfigTBL_cy8c28433_micromouse_Bank0:
 	db		a3h, 00h		; DecimatorDataLow:1 register (DEC1_DL)
 	db		a5h, 00h		; DecimatorDataLow:2 register (DEC2_DL)
 	db		a7h, 00h		; DecimatorDataLow:3 register (DEC3_DL)
-	db		d6h, 44h		; I2CConfig:0 register (I2C0_CFG)
+	db		d6h, 00h		; I2CConfig:0 register (I2C0_CFG)
 	db		e8h, 00h		; Multiply0InputX register (MUL0_X)
 	db		e9h, 00h		; Multiply0InputY register (MUL0_Y)
 	db		a8h, 00h		; Multiply1InputX register (MUL1_X)
@@ -78,9 +82,9 @@ LoadConfigTBL_cy8c28433_micromouse_Bank0:
 	db		b2h, 00h		; Row_0_LogicInputAMux register (RDI0IS)
 	db		b3h, 33h		; Row_0_LogicSelect_0 register (RDI0LT0)
 	db		b4h, 33h		; Row_0_LogicSelect_1 register (RDI0LT1)
-	db		b5h, 00h		; Row_0_OutputDrive_0 register (RDI0RO0)
+	db		b5h, 40h		; Row_0_OutputDrive_0 register (RDI0RO0)
 	db		b6h, 10h		; Row_0_OutputDrive_1 register (RDI0RO1)
-	db		b8h, ffh		; Row_1_InputMux register (RDI1RI)
+	db		b8h, feh		; Row_1_InputMux register (RDI1RI)
 	db		b9h, 00h		; Row_1_InputSync register (RDI1SYN)
 	db		bah, 10h		; Row_1_LogicInputAMux register (RDI1IS)
 	db		bbh, 33h		; Row_1_LogicSelect_0 register (RDI1LT0)
@@ -107,7 +111,6 @@ LoadConfigTBL_cy8c28433_micromouse_Bank1:
 	db		24h, 31h		;Counter16_Tick_FUNC_MSB_REG(DBC01FN)
 	db		25h, 36h		;Counter16_Tick_INPUT_MSB_REG(DBC01IN)
 	db		26h, 40h		;Counter16_Tick_OUTPUT_MSB_REG(DBC01OU)
-;  Instance name EzI2Cs, User Module EzI2Cs
 ;  Instance name PWM8_LeftFwd, User Module PWM8
 ;       Instance name PWM8_LeftFwd, Block Name PWM8(DCC23)
 	db		4fh, 00h		;PWM8_LeftFwd_(DCC23CR1)
@@ -140,6 +143,12 @@ LoadConfigTBL_cy8c28433_micromouse_Bank1:
 	db		42h, 44h		;PWM8_RightRev_OUTPUT_REG(DBC20OU)
 ;  Instance name SAR10, User Module SAR10
 ;  Instance name SleepTimer, User Module SleepTimer
+;  Instance name TX8_BT, User Module TX8
+;       Instance name TX8_BT, Block Name TX8(DCC03)
+	db		2fh, 00h		;TX8_BT_(DCC03CR1)
+	db		2ch, 0dh		;TX8_BT_FUNC_REG     (DCC03FN)
+	db		2dh, 01h		;TX8_BT_INPUT_REG    (DCC03IN)
+	db		2eh, 45h		;TX8_BT_OUTPUT_REG   (DCC03OU)
 ;  Global Register values Bank 1
 	db		a8h, 00h		; ADCControl0 register (SADC_CR0)
 	db		a9h, 08h		; ADCControl1 register (SADC_CR1)
@@ -187,12 +196,12 @@ LoadConfigTBL_cy8c28433_micromouse_Bank1:
 	db		a0h, 00h		; GlobalDigitalInterconnect_Drive_Odd_Input_Control register (GDI_O_IN_CR)
 	db		d2h, 00h		; GlobalDigitalInterconnect_Drive_Odd_Output register (GDI_O_OU)
 	db		a2h, 00h		; GlobalDigitalInterconnect_Drive_Odd_Output_Control register (GDI_O_OU_CR)
-	db		adh, 80h		; I2CAddress:0 register (I2C0_ADDR)
+	db		adh, 00h		; I2CAddress:0 register (I2C0_ADDR)
 	db		e7h, 00h		; IDACMode register (IDACMODE)
 	db		e1h, 3eh		; OscillatorControl_1 register (OSC_CR1)
 	db		e2h, 00h		; OscillatorControl_2 register (OSC_CR2)
-	db		dfh, ffh		; OscillatorControl_3 register (OSC_CR3)
-	db		deh, 02h		; OscillatorControl_4 register (OSC_CR4)
+	db		dfh, 19h		; OscillatorControl_3 register (OSC_CR3)
+	db		deh, 00h		; OscillatorControl_4 register (OSC_CR4)
 	db		ddh, 00h		; OscillatorGlobalBusEnableControl register (OSC_GO_EN)
 	db		85h, 00h		; PWM_Control register (ACE_PWM_CR)
 	db		d8h, 00h		; Port_0_MUXBusCtrl register (MUX_CR0)
@@ -226,13 +235,13 @@ LoadConfigTBL_cy8c28433_micromouse_Ordered:
 	mov	reg[03h], 00h		; Port_0_IntCtrl_1 register (PRT0IC1)
 	M8C_SetBank0
 	mov	reg[01h], 00h		; Port_0_IntEn register (PRT0IE)
-	mov	reg[04h], 07h		; Port_1_Data register (PRT1DR)
+	mov	reg[04h], 06h		; Port_1_Data register (PRT1DR)
 	M8C_SetBank1
-	mov	reg[04h], 0fh		; Port_1_DriveMode_0 register (PRT1DM0)
-	mov	reg[05h], f3h		; Port_1_DriveMode_1 register (PRT1DM1)
+	mov	reg[04h], 0eh		; Port_1_DriveMode_0 register (PRT1DM0)
+	mov	reg[05h], f1h		; Port_1_DriveMode_1 register (PRT1DM1)
 	M8C_SetBank0
 	mov	reg[07h], 0fh		; Port_1_DriveMode_2 register (PRT1DM2)
-	mov	reg[06h], 00h		; Port_1_GlobalSelect register (PRT1GS)
+	mov	reg[06h], 02h		; Port_1_GlobalSelect register (PRT1GS)
 	M8C_SetBank1
 	mov	reg[06h], f0h		; Port_1_IntCtrl_0 register (PRT1IC0)
 	mov	reg[07h], f0h		; Port_1_IntCtrl_1 register (PRT1IC1)

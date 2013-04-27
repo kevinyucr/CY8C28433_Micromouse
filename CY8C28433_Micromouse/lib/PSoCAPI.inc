@@ -2,7 +2,6 @@
 ;
 include "PSoCGPIOINT.inc"
 include "Counter16_Tick.inc"
-include "EzI2Cs.inc"
 include "PWM8_LeftFwd.inc"
 include "PWM8_LeftRev.inc"
 include "PWM8_Pump.inc"
@@ -10,3 +9,4 @@ include "PWM8_RightFwd.inc"
 include "PWM8_RightRev.inc"
 include "SAR10.inc"
 include "SleepTimer.inc"
+include "TX8_BT.inc"

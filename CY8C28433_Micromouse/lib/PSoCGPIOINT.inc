@@ -123,28 +123,6 @@ Pump_Comparator_IntCtrl_1_ADDR:	equ	103h
 Pump_Comparator_IntEn_ADDR:	equ	1h
 Pump_Comparator_MASK:	equ	80h
 Pump_Comparator_MUXBusCtrl_ADDR:	equ	1d8h
-; EzI2CsSDA address and mask equates
-EzI2CsSDA_Data_ADDR:	equ	4h
-EzI2CsSDA_DriveMode_0_ADDR:	equ	104h
-EzI2CsSDA_DriveMode_1_ADDR:	equ	105h
-EzI2CsSDA_DriveMode_2_ADDR:	equ	7h
-EzI2CsSDA_GlobalSelect_ADDR:	equ	6h
-EzI2CsSDA_IntCtrl_0_ADDR:	equ	106h
-EzI2CsSDA_IntCtrl_1_ADDR:	equ	107h
-EzI2CsSDA_IntEn_ADDR:	equ	5h
-EzI2CsSDA_MASK:	equ	1h
-EzI2CsSDA_MUXBusCtrl_ADDR:	equ	1d9h
-; EzI2CsSCL address and mask equates
-EzI2CsSCL_Data_ADDR:	equ	4h
-EzI2CsSCL_DriveMode_0_ADDR:	equ	104h
-EzI2CsSCL_DriveMode_1_ADDR:	equ	105h
-EzI2CsSCL_DriveMode_2_ADDR:	equ	7h
-EzI2CsSCL_GlobalSelect_ADDR:	equ	6h
-EzI2CsSCL_IntCtrl_0_ADDR:	equ	106h
-EzI2CsSCL_IntCtrl_1_ADDR:	equ	107h
-EzI2CsSCL_IntEn_ADDR:	equ	5h
-EzI2CsSCL_MASK:	equ	2h
-EzI2CsSCL_MUXBusCtrl_ADDR:	equ	1d9h
 ; IR_Emitter address and mask equates
 IR_Emitter_Data_ADDR:	equ	4h
 IR_Emitter_DriveMode_0_ADDR:	equ	104h

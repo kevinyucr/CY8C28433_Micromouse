@@ -14,7 +14,7 @@ void main(void)
 	Encoder_Init(); // encoder.h
 	Motor_Init();   // motor.h
 	LED_Init();     // ui.h
-	I2C_Init();     // ui.h
+	Debug_Init();     // ui.h
 	ADC_Init();     // adc.h
 	Sched_Init();   // sched.h
 	Motion_Init();  // motion.h

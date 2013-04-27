@@ -68,12 +68,12 @@ CLOCK_DIV_VC1_JUST:		equ	30h	;VC1 clock divider justified
 CLOCK_DIV_VC2:			equ	eh	;VC2 clock divider
 CLOCK_DIV_VC2_MASK:		equ	fh	;VC2 clock divider mask
 CLOCK_DIV_VC2_JUST:		equ	eh	;VC2 clock divider justified
-CLOCK_INPUT_VC3:		equ	2h	;VC3 clock source
+CLOCK_INPUT_VC3:		equ	0h	;VC3 clock source
 CLOCK_INPUT_VC3_MASK:	equ	3h	;VC3 clock source mask
-CLOCK_INPUT_VC3_JUST:	equ	2h	;VC3 clock source justified
-CLOCK_DIV_VC3:			equ	ffh	;VC3 clock divider
+CLOCK_INPUT_VC3_JUST:	equ	0h	;VC3 clock source justified
+CLOCK_DIV_VC3:			equ	19h	;VC3 clock divider
 CLOCK_DIV_VC3_MASK:		equ	ffh	;VC3 clock divider mask
-CLOCK_DIV_VC3_JUST:		equ	ffh	;VC3 clock divider justified
+CLOCK_DIV_VC3_JUST:		equ	19h	;VC3 clock divider justified
 ANALOG_POWER:			equ	7h	;Analog power control
 ANALOG_POWER_MASK:		equ	7h	;Analog power control mask
 ANALOG_POWER_JUST:		equ	7h	;Analog power control justified
@@ -103,9 +103,9 @@ PORT_0_DRIVE_2:			equ ffh	;Port 0 drive mode 2 register (PRT0DM2)
 PORT_0_INTENABLE:		equ 0h	;Port 0 interrupt enable register (PRT0IE)
 PORT_0_INTCTRL_0:		equ 0h	;Port 0 interrupt control 0 register (PRT0IC0)
 PORT_0_INTCTRL_1:		equ 0h	;Port 0 interrupt control 1 register (PRT0IC1)
-PORT_1_GLOBAL_SELECT:	equ 0h	;Port 1 global select register (PRT1GS)
-PORT_1_DRIVE_0:			equ fh	;Port 1 drive mode 0 register (PRT1DM0)
-PORT_1_DRIVE_1:			equ f3h	;Port 1 drive mode 1 register (PRT1DM1)
+PORT_1_GLOBAL_SELECT:	equ 2h	;Port 1 global select register (PRT1GS)
+PORT_1_DRIVE_0:			equ eh	;Port 1 drive mode 0 register (PRT1DM0)
+PORT_1_DRIVE_1:			equ f1h	;Port 1 drive mode 1 register (PRT1DM1)
 PORT_1_DRIVE_2:			equ fh	;Port 1 drive mode 2 register (PRT1DM2)
 PORT_1_INTENABLE:		equ f0h	;Port 1 interrupt enable register (PRT1IE)
 PORT_1_INTCTRL_0:		equ f0h	;Port 1 interrupt control 0 register (PRT1IC0)
