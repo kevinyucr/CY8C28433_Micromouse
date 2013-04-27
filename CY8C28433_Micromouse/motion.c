@@ -147,7 +147,7 @@ void _Motion_CommandForwardFollow(void)
 {
 	int difference;
 
-	if (motorSetpoint.right < MOTION_COUNT_CELL)
+	if (motorSetpoint.right < MOTION_COUNT_CELL && adcIRFront < 230)
 	{
 	
 		motorSetpoint.right += MOTION_BASE_VELOCITY;

@@ -10,6 +10,7 @@
 
 #define MOTION_COUNT_BACKLASH 15   // encoder ticks of drivetrain backlash
 #define MOTION_COUNT_CELL     547  // encoder ticks per wall length
+//#define MOTION_COUNT_CELL     537  // encoder ticks per wall length
 #define MOTION_COUNT_ROT90    261  // encoder ticks per wheel to rotate in place 90 degrees
 
 #define MOTION_COMMAND_NONE    0    // Do nothing
