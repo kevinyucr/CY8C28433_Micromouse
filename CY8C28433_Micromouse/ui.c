@@ -16,6 +16,14 @@ void LED_Init(void)
 	LED_All_Off();
 }
                 
+void LED_ShowWalls(void)
+{
+	LED_All_Off();
+	if (ADC_FilteredLeftWallExists)  LED_Left_On();
+	if (ADC_FilteredFrontWallExists) LED_Front_On();
+	if (ADC_FilteredRightWallExists) LED_Right_On();
+}
+				
 void I2C_Init(void)
 {
 	EzI2Cs_SetRamBuffer(sizeof(I2C_Regs), 0, (char*)(&I2C_Regs));

@@ -21,6 +21,8 @@ void Sched_Init(void);
 
 void Sched_RunQueue(void);
 
+// add function to request that a module be run on the next tick. Adds to run queue (+reset execution period?). Example use is motion requesting nav to be run immediately after finishing all its momement commands
+
 #pragma interrupt_handler TICK_ISR
 void TICK_ISR(void);
 

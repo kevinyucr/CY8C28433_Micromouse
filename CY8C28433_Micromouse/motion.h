@@ -17,7 +17,11 @@
 #define MOTION_COMMAND_LEFT90  2    // Rotate in place 90 degrees left
 #define MOTION_COMMAND_RIGHT90 4    // Rotate in place 90 degrees right
 
+#define MOTION_COMMAND_FWDWAIT 5    // Go forward 1 cell when front is free
+#define MOTION_COMMAND_FWDFOLLOW 6  // Go forward 1 cell while following wall.
+
 #define Motion_Ready()  (motionCommandNext == MOTION_COMMAND_NONE)  // Motion module is ready to accept another command
+#define Motion_Done()   (motionCommandCurrent == MOTION_COMMAND_NONE)
 
 #define Motion_SetNextCommand(__c)  (motionCommandNext = __c)  // Set the motion module's next command
 
@@ -30,5 +34,7 @@ void Motion_Update(void);
 void _Motion_CommandForward(void);
 void _Motion_CommandLeft90(void);
 void _Motion_CommandRight90(void);
+void _Motion_CommandForwardWait(void);
+void _Motion_CommandForwardFollow(void);
 
 #endif

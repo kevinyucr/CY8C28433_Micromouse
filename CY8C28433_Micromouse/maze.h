@@ -23,18 +23,20 @@ typedef unsigned char Direction;
 #define CELL_CENTER 0x77   // Center of a 16x16 maze
 
 // Cell flags
-// [7] - 
-// [6] - Wall WEST
-// [5] - 
-// [4] - Wall SOUTH
-// [3] - 
-// [2] - Wall EAST
-// [1] - 
-// [0] - WallNORTH 
+// b[7] - 
+// b[6] - WALL_WEST
+// b[5] - 
+// b[4] - WALL_SOUTH
+// b[3] - 
+// b[2] - WALL_EAST
+// b[1] - CELL_IN_QUEUE
+// b[0] - WALL_NORTH 
 #define WALL_WEST  0x40
 #define WALL_SOUTH 0x10
 #define WALL_EAST  0x04
 #define WALL_NORTH 0x01
+
+#define WALL_MASK  0x55  // A mask that allows only WALL flags
 
 #define MOUSE_LEFT   0x40
 #define MOUSE_BEHIND 0x10

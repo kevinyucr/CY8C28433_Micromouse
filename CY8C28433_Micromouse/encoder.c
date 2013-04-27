@@ -19,7 +19,7 @@ void Encoder_Init(void)
 
 void GPIO_ISR(void)
 {
-	LED_Right_On();
+	//LED_Right_On();
 	_quadratureState = _quadrature_left();
 	if (_quadratureState != _previousQuadratureStateLeft)
 	{
@@ -87,5 +87,5 @@ void GPIO_ISR(void)
 		}
 		_previousQuadratureStateRight = _quadratureState;
 	}
-	LED_Right_Off();
+	//LED_Right_Off();
 }

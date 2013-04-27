@@ -37,7 +37,7 @@ void Sched_RunQueue(void)
 	}
 	else
 	{
-		LED_Front_On();		
+		//LED_Front_On();		
 		
 		// There is a scheduled task in the queue
 		if (_schedCycleQueue & SCHED_RUN_ADC)
@@ -60,7 +60,7 @@ void Sched_RunQueue(void)
 			// Motion control module is scheduled to run this cycle
 			Motion_Update();
 		}
-		LED_Front_Off();
+		//LED_Front_Off();
 	}
 }
 

@@ -23,6 +23,7 @@
 						LED_Front_Off()
 
 void LED_Init(void);	
+void LED_ShowWalls(void);
 
 #define I2C_SLAVE_ADDRESS 4
 

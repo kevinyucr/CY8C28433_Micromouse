@@ -57,14 +57,21 @@ void Motion_Update(void)
 	{
 		_Motion_CommandRight90();
 	}
-
+	else if (motionCommandCurrent == MOTION_COMMAND_FWDWAIT)  //------------------------------------
+	{
+		_Motion_CommandForwardWait();
+	}
+	else if (motionCommandCurrent == MOTION_COMMAND_FWDFOLLOW) //------------------------------------
+	{
+		_Motion_CommandForwardFollow();
+	}
 }
 
 void _Motion_CommandForward(void)
 {
 	if (motorSetpoint.right < MOTION_COUNT_CELL)
 		{
-			motorSetpoint.right += MOTION_BASE_VELOCITY - 1;
+			motorSetpoint.right += MOTION_BASE_VELOCITY;
 			motorSetpoint.left += MOTION_BASE_VELOCITY;
 			
 			motorSetpoint.left = abs(motorSetpoint.left);
@@ -113,3 +120,51 @@ void _Motion_CommandLeft90(void)
 		motionCommandCurrent = MOTION_COMMAND_NONE;
 	}
 }
+
+void _Motion_CommandForwardWait(void)
+{
+	if (motorSetpoint.right < MOTION_COUNT_CELL)
+	{
+		if (!ADC_FrontWallExists)
+		{
+			motorSetpoint.right += MOTION_BASE_VELOCITY;
+			motorSetpoint.left += MOTION_BASE_VELOCITY;
+		
+			//motorSetpoint.left = abs(motorSetpoint.left);  // not sure what this does
+		}
+		
+		
+	}
+	else
+	{
+		// Setpoint reached
+		motionCommandCurrent = MOTION_COMMAND_NONE;
+	}
+
+}
+
+void _Motion_CommandForwardFollow(void)
+{
+	int difference;
+
+	if (motorSetpoint.right < MOTION_COUNT_CELL)
+	{
+	
+		motorSetpoint.right += MOTION_BASE_VELOCITY;
+		motorSetpoint.left += MOTION_BASE_VELOCITY;
+	
+		if (ADC_LeftWallExists && ADC_RightWallExists)
+		{
+			
+			motorSetpoint.right -= (adcIRLeft - ADC_WALL_THRESHOLD) / 100;
+			motorSetpoint.left -= (adcIRRight - ADC_WALL_THRESHOLD) / 100;
+		}
+	}
+	else
+	{
+		// Setpoint reached
+		motionCommandCurrent = MOTION_COMMAND_NONE;
+	}
+
+}
+
