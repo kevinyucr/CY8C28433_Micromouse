@@ -120,26 +120,26 @@ void Nav_RandomWander2(void)
 				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
 				else
 				{
-					if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
-				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+					if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));
+				else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
 				}
 			}
 			else if (L_OPEN)
 			{
 				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
-				else Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+				else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));
 			}
 			else if (R_OPEN)
 			{
 				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
-				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+				else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
 			}
 			else Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW); // forward only
 		}
 		else
 		{
-			if      ( L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);  // only left
-			else if (!L_OPEN &&  R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_RIGHT90); // only right
+			if      ( L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));  // only left
+			else if (!L_OPEN &&  R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90)); // only right
 			else if (!L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);  // dead end
 			else
 			{

@@ -19,8 +19,8 @@ void Motion_Update(void)
 	{
 		// If not currently running a command, load next command.
 		// There is no next command, nothing happens and mouse maintains position
-		motionCommandCurrent = motionCommandNext;
-		motionCommandNext = MOTION_COMMAND_NONE;
+		motionCommandCurrent = MOTION_FIRST(motionCommandNext);
+		motionCommandNext = MOTION_SECOND(motionCommandNext);
 		
 		Motor_Center();
 		

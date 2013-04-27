@@ -21,8 +21,15 @@
 #define MOTION_COMMAND_FWDWAIT 5    // Go forward 1 cell when front is free
 #define MOTION_COMMAND_FWDFOLLOW 6  // Go forward 1 cell while following wall.
 
+// for pairing up commands
+#define MOTION_APPEND(first, second) (first + (second << 4))
+#define MOTION_FIRST(command)      (command & 0x0F)
+#define MOTION_SECOND(command)     ((command >> 4) & 0x0F)
+#define MOTION_HAS_SECOND(command) (command & 0xF0)
+#define MOTION_APPEND_FWD(first)   MOTION_APPEND(first, MOTION_COMMAND_FWDFOLLOW)
+
 #define Motion_Ready()  (motionCommandNext == MOTION_COMMAND_NONE)  // Motion module is ready to accept another command
-#define Motion_Done()   (motionCommandCurrent == MOTION_COMMAND_NONE)
+#define Motion_Done()   (motionCommandCurrent == MOTION_COMMAND_NONE && Motion_Ready())
 
 #define Motion_SetNextCommand(__c)  (motionCommandNext = __c)  // Set the motion module's next command
 

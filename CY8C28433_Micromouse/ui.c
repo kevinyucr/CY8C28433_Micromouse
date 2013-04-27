@@ -57,4 +57,10 @@ void Debug_Update(void)
 	}
 	TX8_BT_PutCRLF();
 	#endif
+	
+	// LEDs for show
+	LED_All_Off();
+	if (ADC_FrontWallExists) LED_Front_On();
+	if (ADC_LeftWallExists) LED_Left_On();
+	if (ADC_RightWallExists) LED_Right_On();
 }
