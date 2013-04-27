@@ -49,7 +49,7 @@ extern unsigned char adcButtonPressed;
 void ADC_Init(void);
 void ADC_Update(void);
 
-#define ADC_WALL_THRESHOLD   100
+#define ADC_WALL_THRESHOLD   200
 
 #define ADC_FrontWallExists  (adcIRFront > ADC_WALL_THRESHOLD)
 #define ADC_LeftWallExists   (adcIRLeft  > ADC_WALL_THRESHOLD)

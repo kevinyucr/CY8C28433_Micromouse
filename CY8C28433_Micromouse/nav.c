@@ -29,7 +29,7 @@ void Nav_Update(void)
 	if (adcButtonPressed)
 	{
 		
-		Nav_RandomWander1();
+		Nav_RandomWander2();
 	}
 
 }
@@ -101,9 +101,55 @@ void Nav_RandomWander1(void)
 				Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
 			}
 		}
-	}
-	
+	}	
 }
+
+#define L_OPEN (!ADC_LeftWallExists)
+#define R_OPEN (!ADC_RightWallExists)
+#define F_OPEN (!ADC_FrontWallExists)
+
+void Nav_RandomWander2(void)
+{
+	// Go forward. Turn when blocked, picking a random direction
+	if (Motion_Done())
+	{
+		if (F_OPEN)
+		{
+			if (L_OPEN && R_OPEN) // three-way split
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else
+				{
+					if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+				}
+			}
+			else if (L_OPEN)
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			}
+			else if (R_OPEN)
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			}
+			else Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW); // forward only
+		}
+		else
+		{
+			if      ( L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);  // only left
+			else if (!L_OPEN &&  R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_RIGHT90); // only right
+			else if (!L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);  // dead end
+			else
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			}
+		}
+	}
+}
+
 const char _navRandomness[] = {0x9a, 0x81, 0x47, 0x6b, 0x81, 0xbe, 0xb0, 0xf0,
                                0xdc, 0x18, 0x4f, 0x44, 0x9f, 0x62, 0xe8, 0x5a,
                                0xda, 0x6a, 0x7e, 0x08, 0x18, 0x22, 0x6f, 0x95,
