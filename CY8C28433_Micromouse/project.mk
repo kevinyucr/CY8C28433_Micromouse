@@ -1,7 +1,7 @@
 PROJNAME=CY8C28433_Micromouse
 DEVICE=CY8C28433
 BASEDEVICE=CY8C28033
-PROJPATH=C:/Users/Kevin/Dropbox/PSOCDE~1/CY314B~1/CY8C28~1
+PROJPATH=C:/Users/Kevin/Dropbox/PSOCDE~1/CY8C28~4/CY8C28~1
 PSOCDIR=C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1
 INCLUDE_PATH=C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/include/CY8C28~1
 CSRCS= adc.c encoder.c main.c maze.c motion.c motor.c nav.c sched.c ui.c

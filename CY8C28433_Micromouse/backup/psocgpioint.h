@@ -214,46 +214,6 @@ BYTE			Pump_Comparator_IntEn_ADDR;
 #define Pump_Comparator_MASK 0x80
 #pragma	ioport	Pump_Comparator_MUXBusCtrl_ADDR:	0x1d8
 BYTE			Pump_Comparator_MUXBusCtrl_ADDR;
-// EzI2CsSDA address and mask defines
-#pragma	ioport	EzI2CsSDA_Data_ADDR:	0x4
-BYTE			EzI2CsSDA_Data_ADDR;
-#pragma	ioport	EzI2CsSDA_DriveMode_0_ADDR:	0x104
-BYTE			EzI2CsSDA_DriveMode_0_ADDR;
-#pragma	ioport	EzI2CsSDA_DriveMode_1_ADDR:	0x105
-BYTE			EzI2CsSDA_DriveMode_1_ADDR;
-#pragma	ioport	EzI2CsSDA_DriveMode_2_ADDR:	0x7
-BYTE			EzI2CsSDA_DriveMode_2_ADDR;
-#pragma	ioport	EzI2CsSDA_GlobalSelect_ADDR:	0x6
-BYTE			EzI2CsSDA_GlobalSelect_ADDR;
-#pragma	ioport	EzI2CsSDA_IntCtrl_0_ADDR:	0x106
-BYTE			EzI2CsSDA_IntCtrl_0_ADDR;
-#pragma	ioport	EzI2CsSDA_IntCtrl_1_ADDR:	0x107
-BYTE			EzI2CsSDA_IntCtrl_1_ADDR;
-#pragma	ioport	EzI2CsSDA_IntEn_ADDR:	0x5
-BYTE			EzI2CsSDA_IntEn_ADDR;
-#define EzI2CsSDA_MASK 0x1
-#pragma	ioport	EzI2CsSDA_MUXBusCtrl_ADDR:	0x1d9
-BYTE			EzI2CsSDA_MUXBusCtrl_ADDR;
-// EzI2CsSCL address and mask defines
-#pragma	ioport	EzI2CsSCL_Data_ADDR:	0x4
-BYTE			EzI2CsSCL_Data_ADDR;
-#pragma	ioport	EzI2CsSCL_DriveMode_0_ADDR:	0x104
-BYTE			EzI2CsSCL_DriveMode_0_ADDR;
-#pragma	ioport	EzI2CsSCL_DriveMode_1_ADDR:	0x105
-BYTE			EzI2CsSCL_DriveMode_1_ADDR;
-#pragma	ioport	EzI2CsSCL_DriveMode_2_ADDR:	0x7
-BYTE			EzI2CsSCL_DriveMode_2_ADDR;
-#pragma	ioport	EzI2CsSCL_GlobalSelect_ADDR:	0x6
-BYTE			EzI2CsSCL_GlobalSelect_ADDR;
-#pragma	ioport	EzI2CsSCL_IntCtrl_0_ADDR:	0x106
-BYTE			EzI2CsSCL_IntCtrl_0_ADDR;
-#pragma	ioport	EzI2CsSCL_IntCtrl_1_ADDR:	0x107
-BYTE			EzI2CsSCL_IntCtrl_1_ADDR;
-#pragma	ioport	EzI2CsSCL_IntEn_ADDR:	0x5
-BYTE			EzI2CsSCL_IntEn_ADDR;
-#define EzI2CsSCL_MASK 0x2
-#pragma	ioport	EzI2CsSCL_MUXBusCtrl_ADDR:	0x1d9
-BYTE			EzI2CsSCL_MUXBusCtrl_ADDR;
 // IR_Emitter address and mask defines
 #pragma	ioport	IR_Emitter_Data_ADDR:	0x4
 BYTE			IR_Emitter_Data_ADDR;

@@ -10,9 +10,9 @@ void LED_Init(void)
 void LED_ShowWalls(void)
 {
 	LED_All_Off();
-	if (ADC_FilteredLeftWallExists)  LED_Left_On();
-	if (ADC_FilteredFrontWallExists) LED_Front_On();
-	if (ADC_FilteredRightWallExists) LED_Right_On();
+	if (ADC_FrontWallExists) LED_Front_On();
+	if (ADC_LeftWallExists) LED_Left_On();
+	if (ADC_RightWallExists) LED_Right_On();
 }
 				
 void Debug_Init(void)
@@ -58,9 +58,8 @@ void Debug_Update(void)
 	TX8_BT_PutCRLF();
 	#endif
 	
+	LED_ShowWalls();
+	
 	// LEDs for show
-	LED_All_Off();
-	if (ADC_FrontWallExists) LED_Front_On();
-	if (ADC_LeftWallExists) LED_Left_On();
-	if (ADC_RightWallExists) LED_Right_On();
+
 }

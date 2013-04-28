@@ -159,7 +159,7 @@ ENDIF
     reti
 
     org   2Ch                      ;PSoC Block DCC03 Interrupt Vector
-    // call	void_handler
+    ljmp	_TX8_BT_ISR
     reti
     
     org   30h                      ;PSoC Block DBC10 Interrupt Vector
@@ -195,7 +195,7 @@ ENDIF
     reti
 	 
     org   60h                      ;PSoC I2C0 Interrupt Vector
-    ljmp	_EzI2Cs_ISR
+    // call	void_handler
     reti
 
 	org   64h                      ;PSoC I2C1 Interrupt Vector
