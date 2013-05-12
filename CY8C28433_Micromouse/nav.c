@@ -111,7 +111,7 @@ void Nav_RandomWander1(void)
 void Nav_RandomWander2(void)
 {
 	// Go forward. Turn when blocked, picking a random direction
-	if (Motion_Done())
+	if (Motion_Done() && Maze_IsFlooded())
 	{
 		if (F_OPEN)
 		{

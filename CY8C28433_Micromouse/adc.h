@@ -22,11 +22,12 @@
 #define ADC_MASK_RIGHT 0x04
 
 // Ambient light offsets
-#define ADC_OFFSET_IR_FRONT 48
+//#define ADC_OFFSET_IR_FRONT 48
 //#define ADC_OFFSET_IR_LEFT  65
-#define ADC_OFFSET_IR_LEFT  50
 //#define ADC_OFFSET_IR_RIGHT 195
-#define ADC_OFFSET_IR_RIGHT 180
+#define ADC_OFFSET_IR_RIGHT 230
+#define ADC_OFFSET_IR_FRONT 18
+#define ADC_OFFSET_IR_LEFT  50
 
 extern unsigned int adcIRFrontDark;
 extern unsigned int adcIRLeftDark;

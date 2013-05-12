@@ -83,6 +83,7 @@ void _Motion_CommandForward(void)
 		{
 			// Setpoint reached
 			motionCommandCurrent = MOTION_COMMAND_NONE;
+
 		}
 
 }
@@ -101,6 +102,12 @@ void _Motion_CommandRight90(void)
 	{
 		// Setpoint reached
 		motionCommandCurrent = MOTION_COMMAND_NONE;
+		
+		Mouse_Direction = RotateDirectionRight(Mouse_Direction,1);
+		
+		TX8_BT_CPutString("Right, Position: ");
+		TX8_BT_PutSHexByte(Mouse_Position);
+		TX8_BT_PutCRLF();
 	}
 }
 
@@ -118,6 +125,11 @@ void _Motion_CommandLeft90(void)
 	{
 		// Setpoint reached
 		motionCommandCurrent = MOTION_COMMAND_NONE;
+		
+		Mouse_Direction = RotateDirectionLeft(Mouse_Direction,1);
+		TX8_BT_CPutString("Left, Position: ");
+		TX8_BT_PutSHexByte(Mouse_Position);
+		TX8_BT_PutCRLF();
 	}
 }
 
@@ -146,24 +158,57 @@ void _Motion_CommandForwardWait(void)
 void _Motion_CommandForwardFollow(void)
 {
 	int difference;
-
-	if (motorSetpoint.right < MOTION_COUNT_CELL && adcIRFront < 230)
+// 230
+	if ( (adcIRFront >  100 && adcIRFront < 230) ||
+	     (adcIRFront <= 100 && motorSetpoint.right < MOTION_COUNT_CELL) )
 	{
 	
 		motorSetpoint.right += MOTION_BASE_VELOCITY;
 		motorSetpoint.left += MOTION_BASE_VELOCITY;
 	
+		LED_All_Off();
 		if (ADC_LeftWallExists && ADC_RightWallExists)
 		{
-			
+			LED_Left_On();
+			LED_Right_On();
 			motorSetpoint.right -= (adcIRLeft - ADC_WALL_THRESHOLD) / 100;
 			motorSetpoint.left -= (adcIRRight - ADC_WALL_THRESHOLD) / 100;
 		}
+		else if (ADC_LeftWallExists)
+		{
+			LED_Left_On();
+			if (adcIRLeft > 450)
+				motorSetpoint.right -= (adcIRLeft - 450) / 50;
+			else
+				motorSetpoint.left -= (450 - adcIRLeft) / 50;
+		}
+		else if (ADC_RightWallExists)
+		{
+			LED_Right_On();
+			if (adcIRRight > 450)
+				motorSetpoint.left -= (adcIRRight - 450) / 50;
+			else
+				motorSetpoint.right -= (450 - adcIRRight) / 50;
+		}
+		
 	}
 	else
 	{
 		// Setpoint reached
 		motionCommandCurrent = MOTION_COMMAND_NONE;
+		
+		if (motorSetpoint.right > (MOTION_COUNT_CELL / 2))
+		{
+			// only change position if the move was "significant"
+			// i.e. not a false move
+			MoveMouseCompass(MouseToCompass(MOUSE_FRONT, Mouse_Direction));
+		
+			TX8_BT_CPutString("Forward, Position: ");
+			TX8_BT_PutSHexByte(Mouse_Position);
+			TX8_BT_PutCRLF();
+			
+			Maze_BeginFlood();
+		}
 	}
 
 }

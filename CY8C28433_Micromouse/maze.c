@@ -15,6 +15,7 @@ unsigned char mazeFloodTailPointer;
 unsigned char mazeFloodCount;
 unsigned char mazeFloodQueue[MAZE_QUEUE_SIZE];
 
+
 #ifdef _M8C
 #pragma data:page1  // Gets RAM page 1 all to itself
 unsigned char mazeFlags[MAZE_CELL_COUNT];
@@ -30,6 +31,7 @@ unsigned char mazeRouting[MAZE_CELL_COUNT];
 #endif
 
 CellIndex Mouse_Position;
+CompassRelative Mouse_Direction;
 
 // Stores the cell to use as the goal when flooding
 CellIndex mazeGoalCell;
@@ -42,8 +44,10 @@ void Maze_Init(void)
 	mazeFloodCount = 0;
 
 	Maze_AddBorders();
+	Maze_BeginFlood();
 	
 	Mouse_Position = CELL_START;
+	Mouse_Direction = MOUSE_NORTH;
 }
 
 
@@ -162,6 +166,115 @@ CellIndex Maze_Dequeue(void)
 		// The queue is empty
 		return 0;
 	}
+}
+
+BOOL Maze_IsFlooded(void)
+{
+	return !mazeFloodCount;
+}
+
+void Maze_BeginFlood(void)
+{
+	CellIndex c;
+	for (c = 0; c < MAZE_UPPER_RIGHT; ++c)
+	{
+		mazeRouting[c] = 255;
+		cellClearFlags(c, CELL_IN_QUEUE);
+	}
+	mazeRouting[MAZE_UPPER_RIGHT] = 255;
+	cellClearFlags(MAZE_UPPER_RIGHT, CELL_IN_QUEUE);
+	
+	mazeRouting[CELL_CENTER] = 0;
+	Maze_Enqueue(CELL_CENTER);
+}
+
+void Maze_FloodCell(CellIndex c, unsigned char level)
+{
+	// don't reflood if it's already flooded
+	if (cellIsInQueue(c)) return;  // We're already going to flood this
+	if (mazeRouting[c] < level) return; // We've already flooded this
+	
+	++ level;
+	mazeRouting[c] = level;
+	Maze_Enqueue(c);
+}
+
+void Maze_FloodStep(void)
+{
+	CellIndex c;
+	unsigned char level;
+	
+	if (Maze_IsFlooded()) return;
+	
+	c = Maze_Dequeue();
+	
+	level = mazeRouting[c];
+	
+	if (!cellWallExists(c, WALL_NORTH)) Maze_FloodCell(c + MAZE_WIDTH, level);
+	if (!cellWallExists(c, WALL_SOUTH)) Maze_FloodCell(c - MAZE_WIDTH, level);
+	if (!cellWallExists(c, WALL_EAST))  Maze_FloodCell(c + 1, level);
+	if (!cellWallExists(c, WALL_WEST))  Maze_FloodCell(c - 1, level);
+
+	//TX8_BT_CPutString("Fld: ");
+	//TX8_BT_PutSHexByte(c);
+	//TX8_BT_PutCRLF();
+}
+
+Direction RotateDirectionLeft(Direction d, unsigned char n)
+{
+	for (;n != 0; --n)
+	{
+		++d;
+		if (d > 3)
+			d = 0;
+	}
+	return d;
+}
+Direction RotateDirectionRight(Direction d, unsigned char n)
+{
+	for (;n != 0; --n)
+	{
+		if (d == 0)
+			d = 4;
+		--d;
+	}
+	return d;
+}
+
+CompassRelative MouseToCompass(MouseRelative direction, CompassRelative heading)
+{
+	CompassRelative result = MOUSE_NORTH;
+	while(direction != heading)
+	{
+		direction = RotateDirectionLeft(direction,1);
+		result = RotateDirectionLeft(result,1);
+	}
+	return result;
+}
+
+void MoveMouseCompass(CompassRelative d)
+{
+	if (d == MOUSE_WEST)
+	{
+		--Mouse_Position;
+	}
+	else if (d == MOUSE_EAST)
+	{
+		++Mouse_Position;
+	}
+	else if (d == MOUSE_NORTH)
+	{
+		Mouse_Position += MAZE_WIDTH;
+	}
+	else if (d == MOUSE_SOUTH)
+	{
+		Mouse_Position -= MAZE_WIDTH;
+	}
+}
+
+void Maze_Print(void)
+{
+	
 }
 
 #ifdef _WIN32

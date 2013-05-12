@@ -72,6 +72,10 @@ void ADC_Update(void)
 		
 		if (adcUser < 10) adcButtonPressed = 1;
 		
+		if (adcIRLeft > 1023) adcIRLeft = 0;
+		if (adcIRFront > 1023) adcIRFront = 0;
+		if (adcIRRight > 1023) adcIRRight = 0;
+		
 		IR_Emitter_Off();
 		/*
 		//------------ Perform hysteresis ------------
@@ -93,7 +97,7 @@ void ADC_Update(void)
 		if (adcIRRightFilterQueue == 0xFF) { adcFilteredWallState |= ADC_MASK_RIGHT; }
 		else if (adcIRRightFilterQueue == 0x00) { adcFilteredWallState &= ~ADC_MASK_RIGHT; }
 		*/
-		LED_ShowWalls();
+		//LED_ShowWalls();
 	}
 	else
 	{	
@@ -127,3 +131,9 @@ void ADC_Update(void)
 		adcGood = 1;
 	}
 }
+
+// ------------ utility algos ------------
+
+#define swap(a, b, temp) temp = a; \
+                         a = b; \
+						 b = temp;

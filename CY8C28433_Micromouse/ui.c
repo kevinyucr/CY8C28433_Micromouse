@@ -1,6 +1,7 @@
 #include "ui.h"
 
-#define DEBUG_BINARY
+//#define DEBUG_BINARY
+//#define DEBUG_TEXT
 
 void LED_Init(void)
 {
@@ -20,6 +21,26 @@ void Debug_Init(void)
 	TX8_BT_Start(TX8_BT_PARITY_NONE);
 	
 }
+
+void Debug_PrintRelDirection(MouseRelative d)
+{
+	if (d == MOUSE_WEST)
+	{
+		--Mouse_Position;
+	}
+	else if (d == MOUSE_EAST)
+	{
+		++Mouse_Position;
+	}
+	else if (d == MOUSE_NORTH)
+	{
+		Mouse_Position += MAZE_WIDTH;
+	}
+	else if (d == MOUSE_SOUTH)
+	{
+		Mouse_Position -= MAZE_WIDTH;
+	}
+}	
 
 void Debug_Update(void)
 {
@@ -48,7 +69,7 @@ void Debug_Update(void)
 	TX8_BT_PutChar(debug_regs[3] & 0x00FF);
 	TX8_BT_PutChar(debug_regs[3] >> 8);
 	#endif
-	#ifndef DEBUG_BINARY
+	#ifdef DEBUG_TEXT
 	for (i = 0; i < 5; ++i)
 	{
 		itoa(str, debug_regs[i], 10);
@@ -58,7 +79,15 @@ void Debug_Update(void)
 	TX8_BT_PutCRLF();
 	#endif
 	
-	LED_ShowWalls();
+	//LED_ShowWalls();
+	
+	/*
+	if (ADC_FrontWallExists)
+	{
+		TX8_BT_PutSHexInt(adcIRFront);
+		TX8_BT_PutCRLF();
+	}
+	*/
 	
 	// LEDs for show
 

@@ -8,7 +8,6 @@
 
 typedef unsigned char CellFlags;  // Represents a cell and it's associated flags
 typedef unsigned char CellIndex;
-typedef unsigned char Direction;
 
 #define MAZE_HEIGHT 16
 #define MAZE_WIDTH  16
@@ -35,7 +34,8 @@ extern CellIndex Mouse_Position;
 // b[3] - 
 // b[2] - WALL_EAST
 // b[1] - CELL_IN_QUEUE
-// b[0] - WALL_NORTH 
+// b[0] - WALL_NORTH
+// Absolute wall position
 #define WALL_WEST  0x40
 #define WALL_SOUTH 0x10
 #define WALL_EAST  0x04
@@ -43,15 +43,41 @@ extern CellIndex Mouse_Position;
 
 #define WALL_MASK  0x55  // A mask that allows only WALL flags
 
-#define MOUSE_LEFT   0x40
-#define MOUSE_BEHIND 0x10
-#define MOUSE_RIGHT  0x04
-#define MOUSE_FRONT  0x01
-
 #define CELL_IN_QUEUE 0x02
+
+//---- Directions -----
+typedef unsigned char Direction;
+// Use to designate cells relative to the current direction of the mouse
+typedef Direction MouseRelative;
+#define MOUSE_LEFT   0
+#define MOUSE_BEHIND 1
+#define MOUSE_RIGHT  2
+#define MOUSE_FRONT  3
+
+// Use for direction mouse is facing
+// Use for compass-relative cell positions relative to the mouse
+typedef Direction CompassRelative;
+#define MOUSE_WEST   0
+#define MOUSE_SOUTH  1
+#define MOUSE_EAST   2
+#define MOUSE_NORTH  3
+
+Direction RotateDirectionLeft(Direction d, unsigned char n);
+Direction RotateDirectionRight(Direction d,  unsigned char n);
+
+// Desired mouse-relative direction and mouse heading to compass-relative
+CompassRelative MouseToCompass(MouseRelative direction, CompassRelative heading);
+
+extern CompassRelative Mouse_Direction;
+
+// ----------------------------
+
+// Move 
+void MoveMouseCompass(CompassRelative d);
 
 #define cellWallExists(c, d)   (mazeFlags[c] &  d)
 #define cellSetFlags(c, f)     (mazeFlags[c] |= f)
+#define cellClearFlags(c, f)   (mazeFlags[c] &= (~f))
 
 #define cellIsInQueue(c)       (mazeFlags[c] & CELL_IN_QUEUE)
 
@@ -69,4 +95,11 @@ void Maze_AddBorders(void);
 void Maze_Enqueue(CellIndex c);
 CellIndex Maze_Dequeue(void);
 
+BOOL Maze_IsFlooded(void);
+void Maze_BeginFlood(void);
+void Maze_FloodStep(void);
+
+void Maze_Print(void);
+
 #endif
+
