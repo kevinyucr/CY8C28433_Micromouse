@@ -233,8 +233,12 @@ void _Motion_CommandForwardFollow(void)
 			TX8_BT_PutSHexByte(mazeRouting[Mouse_Position]);
 			TX8_BT_PutCRLF();
 			
-			
 			Motion_MapAtCurrPos();
+			//LED_All_Off();
+			//if (wallExistsInMouseRelative(MOUSE_FRONT)) LED_Front_On();
+			//if (wallExistsInMouseRelative(MOUSE_LEFT)) LED_Left_On();
+			//if (wallExistsInMouseRelative(MOUSE_RIGHT)) LED_Right_On();
+			
 			Maze_BeginFlood();
 		}
 	}

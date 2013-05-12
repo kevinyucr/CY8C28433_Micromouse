@@ -16,6 +16,7 @@ void Nav_RandomWander1(void);
 void Nav_RandomWander2(void);
 void Nav_FloodFill(void);
 void Nav_FloodFill2(void);
+void Nav_RightWall(void);
 
 unsigned char Nav_GetRandomBit(void);
 

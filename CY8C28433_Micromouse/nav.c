@@ -29,8 +29,9 @@ void Nav_Update(void)
 	if (adcButtonPressed)
 	{
 		
-		Nav_RandomWander2();
+		//Nav_RandomWander2();
 		//Nav_FloodFill2();
+		Nav_RightWall();
 	}
 
 }
@@ -235,6 +236,17 @@ void Nav_FloodFill(void)
 
 	}
 }
+
+void Nav_RightWall(void)
+{
+	if (Motion_Done() && Maze_IsFlooded())
+	{
+		if (R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
+		else if (F_OPEN) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+		else Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+	}
+}
+
 
 const char _navRandomness[] = {0x9a, 0x81, 0x47, 0x6b, 0x81, 0xbe, 0xb0, 0xf0,
                                0xdc, 0x18, 0x4f, 0x44, 0x9f, 0x62, 0xe8, 0x5a,
