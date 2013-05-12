@@ -37,6 +37,7 @@ extern unsigned int adcIRFront;
 extern unsigned int adcIRLeft;
 extern unsigned int adcIRRight;
 
+extern unsigned int adcLastUser;
 extern unsigned int adcUser;
 
 extern unsigned char adcFilteredWallState;

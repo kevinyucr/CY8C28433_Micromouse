@@ -9,6 +9,8 @@
 typedef unsigned char CellFlags;  // Represents a cell and it's associated flags
 typedef unsigned char CellIndex;
 
+extern unsigned char mazeFlags[];
+
 #define MAZE_HEIGHT 16
 #define MAZE_WIDTH  16
 #define MAZE_CELL_COUNT  (MAZE_HEIGHT * MAZE_WIDTH)
@@ -62,6 +64,9 @@ typedef Direction CompassRelative;
 #define MOUSE_EAST   2
 #define MOUSE_NORTH  3
 
+extern const char _DirToFlags[];
+#define CompassToWallFlags(d) _DirToFlags[d]
+
 Direction RotateDirectionLeft(Direction d, unsigned char n);
 Direction RotateDirectionRight(Direction d,  unsigned char n);
 
@@ -89,7 +94,7 @@ void Maze_Init(void);
 //Cell Maze_GetRelativeWalls
 //void Maze_SetRealtiveWalls
 
-void Maze_AddWall(CellIndex c, Direction d);
+void Maze_AddWall(CellIndex c, CompassRelative d);
 void Maze_AddBorders(void);
 
 void Maze_Enqueue(CellIndex c);

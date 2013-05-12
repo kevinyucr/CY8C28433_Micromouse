@@ -67,6 +67,22 @@ void Motion_Update(void)
 	}
 }
 
+void Motion_MapAtCurrPos(void)
+{
+	if (ADC_FrontWallExists)
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_FRONT, Mouse_Direction)));
+	if (ADC_LeftWallExists)
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_LEFT, Mouse_Direction)));
+	if (ADC_RightWallExists)
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_RIGHT, Mouse_Direction)));
+	
+	TX8_BT_CPutString("Mapped: ");
+	TX8_BT_PutSHexByte(mazeFlags[Mouse_Position]);
+	TX8_BT_CPutString(" at ");
+	TX8_BT_PutSHexByte(Mouse_Position);
+	TX8_BT_PutCRLF();
+}
+
 void _Motion_CommandForward(void)
 {
 	if (motorSetpoint.right < MOTION_COUNT_CELL)
@@ -207,6 +223,7 @@ void _Motion_CommandForwardFollow(void)
 			TX8_BT_PutSHexByte(Mouse_Position);
 			TX8_BT_PutCRLF();
 			
+			Motion_MapAtCurrPos();
 			Maze_BeginFlood();
 		}
 	}

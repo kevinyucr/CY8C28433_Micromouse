@@ -51,7 +51,7 @@ void Maze_Init(void)
 }
 
 
-void Maze_AddWall(CellIndex c, Direction d)
+void Maze_AddWall(CellIndex c, CompassRelative d)
 {
 	CellIndex adj;     // Adjacent cell
 	unsigned char x = cellGetColumn(c);
@@ -219,6 +219,8 @@ void Maze_FloodStep(void)
 	//TX8_BT_PutSHexByte(c);
 	//TX8_BT_PutCRLF();
 }
+
+const char _DirToFlags[] = {WALL_WEST, WALL_SOUTH, WALL_EAST, WALL_NORTH};
 
 Direction RotateDirectionLeft(Direction d, unsigned char n)
 {

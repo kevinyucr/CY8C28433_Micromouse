@@ -10,6 +10,7 @@ unsigned int adcIRLeft;
 unsigned int adcIRRight;
 unsigned int adcIRFront;
 
+unsigned int adcLastUser;
 unsigned int adcUser;
 
 // stores a queue of bits that each represent an raw boolean wall reading
@@ -68,6 +69,7 @@ void ADC_Update(void)
 		SAR10_SetADCChannel(ADC_CHAN_USER);
 		SAR10_Trigger();                     // Trigger new sample
 		while(SAR10_fIsDataAvailable()==0);  // Wait while data is not ready
+		//adcLastUser = adcUser;
 		adcUser = SAR10_iGetData();          // Read result
 		
 		if (adcUser < 10) adcButtonPressed = 1;
@@ -106,6 +108,7 @@ void ADC_Update(void)
 		SAR10_SetADCChannel(ADC_CHAN_USER);
 		SAR10_Trigger();                      // Trigger new sample
 		while(SAR10_fIsDataAvailable()==0);   //Wait while data is not ready
+		//adcLastUser = adcUser;
 		adcUser = SAR10_iGetData();           // Read result
 	
 		SAR10_SetADCChannel(ADC_CHAN_IR_FRONT);
