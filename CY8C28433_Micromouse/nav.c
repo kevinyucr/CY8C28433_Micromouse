@@ -30,6 +30,7 @@ void Nav_Update(void)
 	{
 		
 		Nav_RandomWander2();
+		//Nav_FloodFill2();
 	}
 
 }
@@ -147,6 +148,91 @@ void Nav_RandomWander2(void)
 				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
 			}
 		}
+	}
+}
+
+void Nav_FloodFill2(void)
+{
+	// Go forward. Turn when blocked, picking a random direction
+	if (Motion_Done() && Maze_IsFlooded())
+	{
+		unsigned char this_value;
+		unsigned char min_value;
+				
+		this_value = mazeFlags[Mouse_Position];
+		
+		
+		if (F_OPEN)
+		{
+			if (L_OPEN && R_OPEN) // three-way split
+			{
+				if (mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else
+				{
+					if (mazeRouting[CellInMouseRel(MOUSE_LEFT)] < mazeRouting[CellInMouseRel(MOUSE_RIGHT)]) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));
+					else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
+				}
+			}
+			else if (L_OPEN)
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));
+			}
+			else if (R_OPEN)
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+				else Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
+			}
+			else Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW); // forward only
+		}
+		else
+		{
+			if      ( L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));  // only left
+			else if (!L_OPEN &&  R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90)); // only right
+			else if (!L_OPEN && !R_OPEN) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);  // dead end
+			else
+			{
+				if (Nav_GetRandomBit()) Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+				else Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			}
+		}
+	}
+}
+
+void Nav_FloodFill(void)
+{
+	// Go forward. Turn when blocked, picking a random direction
+	if (Motion_Done() && Maze_IsFlooded())
+	{
+		unsigned char this_value;
+		unsigned char min_value;
+				
+		this_value = mazeFlags[Mouse_Position];
+		
+		if (F_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+			TX8_BT_CPutString("NAV: Forward\r\n");
+		}	
+		else if (L_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			TX8_BT_CPutString("NAV: Left\r\n");
+		}	
+		else if (R_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			TX8_BT_CPutString("NAV: Right\r\n");
+		}	
+		else  // dead end, turn around
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			TX8_BT_CPutString("NAV: Dead-end\r\n");
+		}
+
 	}
 }
 

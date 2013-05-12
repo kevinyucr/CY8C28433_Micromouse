@@ -46,4 +46,6 @@ void _Motion_CommandRight90(void);
 void _Motion_CommandForwardWait(void);
 void _Motion_CommandForwardFollow(void);
 
+void Motion_MapAtCurrPos(void);
+
 #endif

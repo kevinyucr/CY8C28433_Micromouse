@@ -279,6 +279,15 @@ void Maze_Print(void)
 	
 }
 
+CellIndex CellInCompassRel(CompassRelative c)
+{
+	if (c == MOUSE_NORTH) return Mouse_Position + MAZE_WIDTH;
+	else if (c == MOUSE_SOUTH) return Mouse_Position - MAZE_WIDTH;
+	else if (c == MOUSE_EAST)  return Mouse_Position + 1;
+	else if (c == MOUSE_WEST)  return Mouse_Position - 1;
+	else return Mouse_Position;
+}
+
 #ifdef _WIN32
 
 void DrawMazeToFile(String^ filename, Byte maze[])

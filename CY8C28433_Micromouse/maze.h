@@ -10,6 +10,7 @@ typedef unsigned char CellFlags;  // Represents a cell and it's associated flags
 typedef unsigned char CellIndex;
 
 extern unsigned char mazeFlags[];
+extern unsigned char mazeRouting[];
 
 #define MAZE_HEIGHT 16
 #define MAZE_WIDTH  16
@@ -72,6 +73,11 @@ Direction RotateDirectionRight(Direction d,  unsigned char n);
 
 // Desired mouse-relative direction and mouse heading to compass-relative
 CompassRelative MouseToCompass(MouseRelative direction, CompassRelative heading);
+
+CellIndex CellInCompassRel(CompassRelative c);
+
+#define CellInMouseRel(m) CellInCompassRel(MouseToCompass(m, Mouse_Direction))
+#define wallExistsInMouseRelative(d) (cellWallExists(Mouse_Position, CompassToWallFlags(MouseToCompass(d, Mouse_Direction))))
 
 extern CompassRelative Mouse_Direction;
 
