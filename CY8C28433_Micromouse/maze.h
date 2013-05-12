@@ -19,8 +19,13 @@ typedef unsigned char Direction;
 #define MAZE_QUEUE_SIZE 128  // Power of two
 #define MAZE_QUEUE_MASK 0x7F
 
+#define CELLINDEX_NS 1;
+#define CELLINDEX_WE MAZE_WIDTH;
+
 #define CELL_START  0x00   // Start cell
 #define CELL_CENTER 0x77   // Center of a 16x16 maze
+
+extern CellIndex Mouse_Position;
 
 // Cell flags
 // b[7] - 

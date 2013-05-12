@@ -160,8 +160,8 @@ unsigned char Nav_GetRandomBit(void)
 	unsigned char bit = seed & (8-1);
 	unsigned char byte = _navRandomness[seed/8];
 	++seed;
-	TX8_BT_CPutString("Random byte: ");
-	TX8_BT_PutSHexByte(byte);
+	//TX8_BT_CPutString("Random byte: ");
+	//TX8_BT_PutSHexByte(byte);
 	byte >>= bit;
 	byte &= 0x01;
 	

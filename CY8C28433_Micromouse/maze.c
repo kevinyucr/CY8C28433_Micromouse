@@ -1,17 +1,35 @@
+#ifdef _WIN32
+#include "stdafx.h"
+using namespace System;
+using namespace System::Drawing;
+using namespace System::Drawing::Imaging;
+#endif
+
 #include "maze.h"
 
+#ifdef _M8C
 #pragma data:page0
+#endif
 unsigned char mazeFloodHeadPointer;
 unsigned char mazeFloodTailPointer;
 unsigned char mazeFloodCount;
 unsigned char mazeFloodQueue[MAZE_QUEUE_SIZE];
 
+#ifdef _M8C
 #pragma data:page1  // Gets RAM page 1 all to itself
 unsigned char mazeFlags[MAZE_CELL_COUNT];
+#endif
 
+#ifdef _M8C
 #pragma data:page2  // Gets RAM page 2 all to itself
+#endif
 unsigned char mazeRouting[MAZE_CELL_COUNT];
+
+#ifdef _M8C
 #pragma data:data
+#endif
+
+CellIndex Mouse_Position;
 
 // Stores the cell to use as the goal when flooding
 CellIndex mazeGoalCell;
@@ -24,6 +42,8 @@ void Maze_Init(void)
 	mazeFloodCount = 0;
 
 	Maze_AddBorders();
+	
+	Mouse_Position = CELL_START;
 }
 
 
@@ -143,3 +163,53 @@ CellIndex Maze_Dequeue(void)
 		return 0;
 	}
 }
+
+#ifdef _WIN32
+
+void DrawMazeToFile(String^ filename, Byte maze[])
+{
+    Bitmap^ b = gcnew Bitmap(16 * 16 + 1, 16 * 16 + 1);
+    Graphics^ g = Graphics::FromImage(b);
+
+	Pen^ blackPen = Pens::Black;
+	Brush^ blueBrush = Brushes::LightSkyBlue;
+	Brush^ whiteBrush = Brushes::White;
+
+	g->FillRectangle(whiteBrush, Rectangle(0,0,16*16,16*16));
+
+    for (int cell = 0; cell < 256; cell++)
+    {
+        int x = cell % 16;
+        int y = 15 - (cell / 16);
+
+        x *= 16;
+        y *= 16;
+
+        unsigned char cellinfo = maze[cell];
+
+        if ((cellinfo & CELL_IN_QUEUE) > 0)
+        {
+            g->FillRectangle(blueBrush, Rectangle(x, y, 16, 16));
+        }
+        if ((cellinfo & WALL_WEST) > 0)
+        {
+            g->DrawLine(blackPen, Point(x, y), Point(x, y + 15));
+        }
+        if ((cellinfo & WALL_SOUTH) > 0)
+        {
+            g->DrawLine(blackPen, Point(x, y + 15),Point(x + 15, y + 15));
+        }
+        if ((cellinfo & WALL_EAST) > 0)
+        {
+            g->DrawLine(blackPen, Point(x + 15, y), Point(x + 15, y + 15));
+        }
+        if ((cellinfo & WALL_NORTH) > 0)
+        {
+            g->DrawLine(blackPen, Point(x, y), Point(x + 15, y));
+        }
+    }
+
+    b->Save(filename, ImageFormat::Png);
+}
+
+#endif
