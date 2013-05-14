@@ -10,6 +10,7 @@ unsigned int adcIRLeft;
 unsigned int adcIRRight;
 unsigned int adcIRFront;
 
+unsigned int adcLastUser;
 unsigned int adcUser;
 
 // stores a queue of bits that each represent an raw boolean wall reading
@@ -68,9 +69,14 @@ void ADC_Update(void)
 		SAR10_SetADCChannel(ADC_CHAN_USER);
 		SAR10_Trigger();                     // Trigger new sample
 		while(SAR10_fIsDataAvailable()==0);  // Wait while data is not ready
+		//adcLastUser = adcUser;
 		adcUser = SAR10_iGetData();          // Read result
 		
 		if (adcUser < 10) adcButtonPressed = 1;
+		
+		if (adcIRLeft > 1023) adcIRLeft = 0;
+		if (adcIRFront > 1023) adcIRFront = 0;
+		if (adcIRRight > 1023) adcIRRight = 0;
 		
 		IR_Emitter_Off();
 		/*
@@ -93,7 +99,7 @@ void ADC_Update(void)
 		if (adcIRRightFilterQueue == 0xFF) { adcFilteredWallState |= ADC_MASK_RIGHT; }
 		else if (adcIRRightFilterQueue == 0x00) { adcFilteredWallState &= ~ADC_MASK_RIGHT; }
 		*/
-		LED_ShowWalls();
+		//LED_ShowWalls();
 	}
 	else
 	{	
@@ -102,6 +108,7 @@ void ADC_Update(void)
 		SAR10_SetADCChannel(ADC_CHAN_USER);
 		SAR10_Trigger();                      // Trigger new sample
 		while(SAR10_fIsDataAvailable()==0);   //Wait while data is not ready
+		//adcLastUser = adcUser;
 		adcUser = SAR10_iGetData();           // Read result
 	
 		SAR10_SetADCChannel(ADC_CHAN_IR_FRONT);
@@ -127,3 +134,9 @@ void ADC_Update(void)
 		adcGood = 1;
 	}
 }
+
+// ------------ utility algos ------------
+
+#define swap(a, b, temp) temp = a; \
+                         a = b; \
+						 b = temp;

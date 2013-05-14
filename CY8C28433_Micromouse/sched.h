@@ -7,7 +7,8 @@
 #include "MicromouseModules.h"
 
 // milliseconds
-#define SCHED_PERIOD_ADC    2  // Can reduce to 1 ms if needed. Sensors can settle fast enough
+#define SCHED_PERIOD_ADC    8  // Can reduce to 1 ms if needed. Sensors can settle fast enough
+//#define SCHED_PERIOD_ADC    2
 #define SCHED_PERIOD_MOTOR  5
 #define SCHED_PERIOD_DEBUG  32
 #define SCHED_PERIOD_MOTION 20
