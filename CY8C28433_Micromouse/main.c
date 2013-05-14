@@ -18,7 +18,6 @@ void main(void)
 	ADC_Init();     // adc.h
 	Sched_Init();   // sched.h
 	Motion_Init();  // motion.h
-	Maze_Init();
 	
 	SleepTimer_Start();
 	SleepTimer_EnableInt();

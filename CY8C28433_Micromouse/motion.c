@@ -121,9 +121,7 @@ void _Motion_CommandRight90(void)
 		
 		Mouse_Direction = RotateDirectionRight(Mouse_Direction,1);
 		
-		Motion_MapAtCurrPos();
-		Maze_BeginFlood();
-		
+
 		TX8_BT_CPutString("Right, Position: ");
 		TX8_BT_PutSHexByte(Mouse_Position);
 		TX8_BT_PutCRLF();
@@ -146,10 +144,7 @@ void _Motion_CommandLeft90(void)
 		motionCommandCurrent = MOTION_COMMAND_NONE;
 		
 		Mouse_Direction = RotateDirectionLeft(Mouse_Direction,1);
-		
-		Motion_MapAtCurrPos();
-		Maze_BeginFlood();
-		
+
 		TX8_BT_CPutString("Left, Position: ");
 		TX8_BT_PutSHexByte(Mouse_Position);
 		TX8_BT_PutCRLF();
@@ -233,13 +228,7 @@ void _Motion_CommandForwardFollow(void)
 			TX8_BT_PutSHexByte(mazeRouting[Mouse_Position]);
 			TX8_BT_PutCRLF();
 			
-			Motion_MapAtCurrPos();
-			//LED_All_Off();
-			//if (wallExistsInMouseRelative(MOUSE_FRONT)) LED_Front_On();
-			//if (wallExistsInMouseRelative(MOUSE_LEFT)) LED_Left_On();
-			//if (wallExistsInMouseRelative(MOUSE_RIGHT)) LED_Right_On();
-			
-			Maze_BeginFlood();
+
 		}
 	}
 

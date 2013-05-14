@@ -44,7 +44,7 @@ void Maze_Init(void)
 	mazeFloodCount = 0;
 
 	Maze_AddBorders();
-	Maze_BeginFlood();
+	//Maze_BeginFlood();
 	
 	Mouse_Position = CELL_START;
 	Mouse_Direction = MOUSE_NORTH;
@@ -141,8 +141,11 @@ void Maze_Enqueue(CellIndex c)
 			
 			mazeFloodHeadPointer ++;                             // advance head pointer
 			mazeFloodHeadPointer &= MAZE_QUEUE_MASK;             // mask off overflow
+			
+			TX8_BT_CPutString("+ Enqueue\r\n");
 		}
 	}
+	
 }
 
 CellIndex Maze_Dequeue(void)
@@ -159,6 +162,7 @@ CellIndex Maze_Dequeue(void)
 		mazeFloodTailPointer ++;                             // advance tail pointer
 		mazeFloodTailPointer &= MAZE_QUEUE_MASK;             // mask off overflow
 		
+		TX8_BT_CPutString("- Dequeue\r\n");
 		return result;
 	}
 	else
@@ -215,9 +219,9 @@ void Maze_FloodStep(void)
 	if (!cellWallExists(c, WALL_EAST))  Maze_FloodCell(c + 1, level);
 	if (!cellWallExists(c, WALL_WEST))  Maze_FloodCell(c - 1, level);
 
-	//TX8_BT_CPutString("Fld: ");
-	//TX8_BT_PutSHexByte(c);
-	//TX8_BT_PutCRLF();
+	TX8_BT_CPutString("Fld: ");
+	TX8_BT_PutSHexByte(c);
+	TX8_BT_PutCRLF();
 }
 
 const char _DirToFlags[] = {WALL_WEST, WALL_SOUTH, WALL_EAST, WALL_NORTH};

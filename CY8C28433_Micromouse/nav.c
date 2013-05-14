@@ -31,7 +31,8 @@ void Nav_Update(void)
 		
 		//Nav_RandomWander2();
 		//Nav_FloodFill2();
-		Nav_RightWall();
+		Nav_FloodFill();
+		//Nav_RightWall();
 	}
 
 }
@@ -203,10 +204,24 @@ void Nav_FloodFill2(void)
 void Nav_FloodFill(void)
 {
 	// Go forward. Turn when blocked, picking a random direction
-	if (Motion_Done() && Maze_IsFlooded())
+	if (Motion_Done())
 	{
 		unsigned char this_value;
 		unsigned char min_value;
+				
+		Motion_MapAtCurrPos();
+		LED_All_Off();
+		if (wallExistsInMouseRelative(MOUSE_FRONT)) LED_Front_On();
+		if (wallExistsInMouseRelative(MOUSE_LEFT)) LED_Left_On();
+		if (wallExistsInMouseRelative(MOUSE_RIGHT)) LED_Right_On();
+		Maze_BeginFlood();
+		while (!Maze_IsFlooded)
+		{
+			Maze_FloodStep();
+		}
+		TX8_BT_CPutString("Route: ");
+		TX8_BT_PutSHexByte(mazeRouting[Mouse_Position]);
+		TX8_BT_CPutString("\r\n");
 				
 		this_value = mazeFlags[Mouse_Position];
 		
