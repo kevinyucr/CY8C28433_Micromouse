@@ -86,6 +86,8 @@ extern CompassRelative Mouse_Direction;
 // Move 
 void MoveMouseCompass(CompassRelative d);
 
+#define cellRowCol(row, col)   ((row * MAZE_WIDTH) + col)
+
 #define cellWallExists(c, d)   (mazeFlags[c] &  d)
 #define cellSetFlags(c, f)     (mazeFlags[c] |= f)
 #define cellClearFlags(c, f)   (mazeFlags[c] &= (~f))
@@ -96,6 +98,9 @@ void MoveMouseCompass(CompassRelative d);
 #define cellGetRow(c)          (c >> 4)
 
 void Maze_Init(void);
+
+// Clears all stored maze information
+void Maze_Clear(void);
 
 //Cell Maze_GetRelativeWalls
 //void Maze_SetRealtiveWalls

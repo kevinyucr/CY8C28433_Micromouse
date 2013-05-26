@@ -42,7 +42,8 @@ void Maze_Init(void)
 	mazeFloodHeadPointer = 0;
 	mazeFloodTailPointer = 0;
 	mazeFloodCount = 0;
-
+	
+	Maze_Clear();
 	Maze_AddBorders();
 	//Maze_BeginFlood();
 	
@@ -50,6 +51,17 @@ void Maze_Init(void)
 	Mouse_Direction = MOUSE_NORTH;
 }
 
+void Maze_Clear(void)
+{
+	CellIndex cell;
+	for (cell = 0; cell < MAZE_UPPER_RIGHT; ++cell)
+	{
+		mazeFlags[cell] = 0;
+		mazeRouting[cell] = 0;
+	}
+	mazeFlags[cell] = 0;  // clear last cell
+	mazeRouting[cell] = 0;
+}
 
 void Maze_AddWall(CellIndex c, CompassRelative d)
 {
@@ -99,7 +111,6 @@ void Maze_AddWall(CellIndex c, CompassRelative d)
 			cellSetFlags(adj, WALL_EAST);   // Set it's EAST wall
 		}
 	}
-	
 }
 
 // Adds walls along the maze edge
@@ -108,6 +119,8 @@ void Maze_AddBorders(void)
 	CellIndex cell;
 	CellIndex oppositeCell;
 
+	Maze_Print();
+	
 	for (cell = MAZE_LOWER_LEFT; cell < MAZE_WIDTH; cell++)
 	{
 		// Cells on lower edge
@@ -125,7 +138,8 @@ void Maze_AddBorders(void)
 		oppositeCell += (MAZE_WIDTH - 1);
 		cellSetFlags(oppositeCell , WALL_EAST);
 	}
-
+	
+	Maze_Print();
 }
 
 void Maze_Enqueue(CellIndex c)
@@ -278,9 +292,76 @@ void MoveMouseCompass(CompassRelative d)
 	}
 }
 
+void Maze_PrintRowTop(unsigned char row)
+{
+	unsigned char col;
+	for (col = 0; col < MAZE_WIDTH; ++col)
+	{
+		TX8_BT_PutChar('+');
+		
+		if (cellWallExists(cellRowCol(row, col), WALL_NORTH))  // check the top wall
+			TX8_BT_PutChar('-');
+		else 
+			TX8_BT_PutChar(' ');
+		
+	}
+	
+	TX8_BT_PutChar('+');
+	TX8_BT_PutCRLF();    // end of line
+}
+
+void Maze_PrintRowMiddle(unsigned char row)
+{
+	unsigned char col = 0;
+	
+	// leftmost wall, should always exist
+	if (cellWallExists(cellRowCol(row, 0), WALL_WEST))  // check bottom top wall
+		TX8_BT_PutChar('|');
+	else 
+		TX8_BT_PutChar(' ');
+	
+	for (col = 0; col < MAZE_WIDTH; ++col)
+	{
+		// space in the middle of the cell
+		TX8_BT_PutChar(' ');
+	
+		// wall on the right of the cell
+		if (cellWallExists(cellRowCol(row, col), WALL_EAST))  // check bottom top wall
+			TX8_BT_PutChar('|');
+		else 
+			TX8_BT_PutChar(' ');	
+	}
+	TX8_BT_PutCRLF();    // end of line	
+}
+
+void Maze_PrintRowBottom(unsigned char row)
+{
+	unsigned char col = 0;
+	for (col = 0; col < MAZE_WIDTH; ++col)
+	{
+		TX8_BT_PutChar('+');
+		
+		if (cellWallExists(cellRowCol(row, col), WALL_SOUTH))  // check bottom top wall
+			TX8_BT_PutChar('-');
+		else 
+			TX8_BT_PutChar(' ');
+	}
+	
+	TX8_BT_PutChar('+');
+	TX8_BT_PutCRLF();    // end of line
+
+}
+	
 void Maze_Print(void)
 {
+	unsigned char row = MAZE_HEIGHT - 1;
+	Maze_PrintRowTop(row);
 	
+	for (; row < MAZE_HEIGHT; --row)
+	{
+		Maze_PrintRowMiddle(row);
+		Maze_PrintRowBottom(row);
+	}
 }
 
 CellIndex CellInCompassRel(CompassRelative c)
