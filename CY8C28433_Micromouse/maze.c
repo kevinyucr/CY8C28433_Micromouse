@@ -300,9 +300,9 @@ void Maze_PrintRowTop(unsigned char row)
 		TX8_BT_PutChar('+');
 		
 		if (cellWallExists(cellRowCol(row, col), WALL_NORTH))  // check the top wall
-			TX8_BT_PutChar('-');
+			TX8_BT_CPutString("--");
 		else 
-			TX8_BT_PutChar(' ');
+			TX8_BT_CPutString("  ");
 		
 	}
 	
@@ -323,7 +323,7 @@ void Maze_PrintRowMiddle(unsigned char row)
 	for (col = 0; col < MAZE_WIDTH; ++col)
 	{
 		// space in the middle of the cell
-		TX8_BT_PutChar(' ');
+		TX8_BT_PutSHexByte(mazeRouting[cellRowCol(row, col)]);
 	
 		// wall on the right of the cell
 		if (cellWallExists(cellRowCol(row, col), WALL_EAST))  // check bottom top wall
@@ -342,9 +342,9 @@ void Maze_PrintRowBottom(unsigned char row)
 		TX8_BT_PutChar('+');
 		
 		if (cellWallExists(cellRowCol(row, col), WALL_SOUTH))  // check bottom top wall
-			TX8_BT_PutChar('-');
+			TX8_BT_CPutString("--");
 		else 
-			TX8_BT_PutChar(' ');
+			TX8_BT_CPutString("  ");
 	}
 	
 	TX8_BT_PutChar('+');
@@ -355,6 +355,9 @@ void Maze_PrintRowBottom(unsigned char row)
 void Maze_Print(void)
 {
 	unsigned char row = MAZE_HEIGHT - 1;
+	
+	TX8_BT_CPutString("Maze Begin:\r\n");
+	
 	Maze_PrintRowTop(row);
 	
 	for (; row < MAZE_HEIGHT; --row)
