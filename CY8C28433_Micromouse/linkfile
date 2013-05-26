@@ -3,4 +3,4 @@
  -Bcy8c28433_micromouse_RAM 
  -o"output/CY8C28433_Micromouse" 
 obj/adc.o obj/encoder.o obj/main.o obj/maze.o obj/motion.o obj/motor.o obj/nav.o obj/sched.o obj/ui.o 	
- ./lib/libPSoc.a -LC:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/lib/LMM/eightpages C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/lib/CY8C28033/cms.a C:/PROGRA~2/Cypress/PSOCDE~1/5.3/Common/CY110F~1/tools/lib/LMM/UASW/MAC/arith.a  
+ ./lib/libPSoc.a -LC:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/lib/LMM/eightpages C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/lib/CY8C28033/cms.a C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CY110F~1/tools/lib/LMM/UASW/MAC/arith.a  
