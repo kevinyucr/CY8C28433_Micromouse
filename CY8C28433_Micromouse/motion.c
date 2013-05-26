@@ -69,18 +69,34 @@ void Motion_Update(void)
 
 void Motion_MapAtCurrPos(void)
 {
-	if (ADC_FrontWallExists)
-		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_FRONT, Mouse_Direction)));
-	if (ADC_LeftWallExists)
-		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_LEFT, Mouse_Direction)));
-	if (ADC_RightWallExists)
-		Maze_AddWall(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_RIGHT, Mouse_Direction)));
+	CompassRelative walldir;
+	TX8_BT_CPutString("Mapped walls: ");
 	
-	TX8_BT_CPutString("Mapped: ");
-	TX8_BT_PutSHexByte(mazeFlags[Mouse_Position]);
-	TX8_BT_CPutString(" at ");
-	TX8_BT_PutSHexByte(Mouse_Position);
+	if (ADC_FrontWallExists)
+	{
+		walldir = MouseToCompass(MOUSE_FRONT, Mouse_Direction);
+		Maze_PrintCompass(walldir);
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(walldir));
+	}
+	if (ADC_LeftWallExists)
+	{
+		walldir = MouseToCompass(MOUSE_LEFT, Mouse_Direction);
+		Maze_PrintCompass(walldir);
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(walldir));
+	}
+	if (ADC_RightWallExists)
+	{
+		walldir = MouseToCompass(MOUSE_RIGHT, Mouse_Direction);
+		Maze_PrintCompass(walldir);
+		Maze_AddWall(Mouse_Position, CompassToWallFlags(walldir));
+	}
 	TX8_BT_PutCRLF();
+	
+	TX8_BT_CPutString("Mouse Direction: ");
+	Maze_PrintCompass(Mouse_Direction);
+	TX8_BT_PutCRLF();
+	
+	Maze_Print();
 }
 
 void _Motion_CommandForward(void)
@@ -177,7 +193,7 @@ void _Motion_CommandForwardFollow(void)
 {
 	int difference;
 // 230
-	if ( (adcIRFront >  100 && adcIRFront < 230) ||
+	if ( (adcIRFront >  100 && adcIRFront < 380) ||
 	     (adcIRFront <= 100 && motorSetpoint.right < MOTION_COUNT_CELL) )
 	{
 	

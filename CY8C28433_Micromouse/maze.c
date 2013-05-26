@@ -46,6 +46,15 @@ void Maze_Init(void)
 	Maze_Clear();
 	Maze_AddBorders();
 	//Maze_BeginFlood();
+
+	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_NORTH));
+	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_WEST));
+	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_SOUTH));
+	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_EAST));
+	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_NORTH));
+	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_WEST));
+	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_SOUTH));
+	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_EAST));
 	
 	Mouse_Position = CELL_START;
 	Mouse_Direction = MOUSE_NORTH;
@@ -57,10 +66,10 @@ void Maze_Clear(void)
 	for (cell = 0; cell < MAZE_UPPER_RIGHT; ++cell)
 	{
 		mazeFlags[cell] = 0;
-		mazeRouting[cell] = 0;
+		mazeRouting[cell] = 0xFA;
 	}
 	mazeFlags[cell] = 0;  // clear last cell
-	mazeRouting[cell] = 0;
+	mazeRouting[cell] = 0xFA;
 }
 
 void Maze_AddWall(CellIndex c, CompassRelative d)
@@ -263,12 +272,22 @@ Direction RotateDirectionRight(Direction d, unsigned char n)
 
 CompassRelative MouseToCompass(MouseRelative direction, CompassRelative heading)
 {
+	/*
 	CompassRelative result = MOUSE_NORTH;
 	while(direction != heading)
 	{
 		direction = RotateDirectionLeft(direction,1);
-		result = RotateDirectionLeft(result,1);
+		result = RotateDirectionRight(result,1);
 	}
+	return result;
+	*/
+	
+	// Heavy magic, see translation spreadsheet
+	CompassRelative result = direction + heading;
+	if (result > 3) result -= 4;  // mod
+	++ result;
+	if (result > 3) result -= 4;  // mod
+	
 	return result;
 }
 
@@ -290,6 +309,15 @@ void MoveMouseCompass(CompassRelative d)
 	{
 		Mouse_Position -= MAZE_WIDTH;
 	}
+}
+
+CellIndex CellInCompassRel(CompassRelative c)
+{
+	if (c == MOUSE_NORTH) return Mouse_Position + MAZE_WIDTH;
+	else if (c == MOUSE_SOUTH) return Mouse_Position - MAZE_WIDTH;
+	else if (c == MOUSE_EAST)  return Mouse_Position + 1;
+	else if (c == MOUSE_WEST)  return Mouse_Position - 1;
+	else return Mouse_Position;
 }
 
 void Maze_PrintRowTop(unsigned char row)
@@ -322,11 +350,17 @@ void Maze_PrintRowMiddle(unsigned char row)
 	
 	for (col = 0; col < MAZE_WIDTH; ++col)
 	{
+		CellIndex cell = cellRowCol(row, col);
+		
 		// space in the middle of the cell
-		TX8_BT_PutSHexByte(mazeRouting[cellRowCol(row, col)]);
-	
+		TX8_BT_CPutString("\x1b[34m");  // blue text
+		if (Mouse_Position == cell)  // color is mouse is here
+			TX8_BT_CPutString("\x1b[41m");  // red bg if mouse location
+		TX8_BT_PutSHexByte(mazeRouting[cell]);
+		TX8_BT_CPutString("\x1b[0m");
+		
 		// wall on the right of the cell
-		if (cellWallExists(cellRowCol(row, col), WALL_EAST))  // check bottom top wall
+		if (cellWallExists(cell, WALL_EAST))  // check bottom top wall
 			TX8_BT_PutChar('|');
 		else 
 			TX8_BT_PutChar(' ');	
@@ -354,9 +388,9 @@ void Maze_PrintRowBottom(unsigned char row)
 	
 void Maze_Print(void)
 {
-	unsigned char row = MAZE_HEIGHT - 1;
+#ifdef ENABLE_MAZE_PRINT
 	
-	TX8_BT_CPutString("Maze Begin:\r\n");
+	unsigned char row = MAZE_HEIGHT - 1;
 	
 	Maze_PrintRowTop(row);
 	
@@ -365,15 +399,26 @@ void Maze_Print(void)
 		Maze_PrintRowMiddle(row);
 		Maze_PrintRowBottom(row);
 	}
+	
+#endif
 }
 
-CellIndex CellInCompassRel(CompassRelative c)
+void Maze_PrintMouse(MouseRelative d)
 {
-	if (c == MOUSE_NORTH) return Mouse_Position + MAZE_WIDTH;
-	else if (c == MOUSE_SOUTH) return Mouse_Position - MAZE_WIDTH;
-	else if (c == MOUSE_EAST)  return Mouse_Position + 1;
-	else if (c == MOUSE_WEST)  return Mouse_Position - 1;
-	else return Mouse_Position;
+	if      (d == MOUSE_LEFT)   TX8_BT_CPutString("Left");
+	else if (d == MOUSE_BEHIND) TX8_BT_CPutString("Behind");
+	else if (d == MOUSE_RIGHT)  TX8_BT_CPutString("Right");
+	else if (d == MOUSE_FRONT)  TX8_BT_CPutString("West");
+	else                        TX8_BT_CPutString("Other Mouse-Relative");
+}
+
+void Maze_PrintCompass(CompassRelative d)
+{
+	if      (d == MOUSE_WEST)   TX8_BT_CPutString("West");
+	else if (d == MOUSE_SOUTH)  TX8_BT_CPutString("South");
+	else if (d == MOUSE_EAST)   TX8_BT_CPutString("East");
+	else if (d == MOUSE_NORTH)  TX8_BT_CPutString("North");
+	else                        TX8_BT_CPutString("Other Compass-Relative");
 }
 
 #ifdef _WIN32

@@ -6,6 +6,9 @@
 #include "PSoCGPIOINT.h"
 #include "MicromouseModules.h"
 
+// ------------ Compile options -----------
+#define ENABLE_MAZE_PRINT
+
 typedef unsigned char CellFlags;  // Represents a cell and it's associated flags
 typedef unsigned char CellIndex;
 
@@ -56,6 +59,7 @@ typedef Direction MouseRelative;
 #define MOUSE_BEHIND 1
 #define MOUSE_RIGHT  2
 #define MOUSE_FRONT  3
+void Maze_PrintMouse(MouseRelative d);
 
 // Use for direction mouse is facing
 // Use for compass-relative cell positions relative to the mouse
@@ -64,6 +68,7 @@ typedef Direction CompassRelative;
 #define MOUSE_SOUTH  1
 #define MOUSE_EAST   2
 #define MOUSE_NORTH  3
+void Maze_PrintCompass(CompassRelative d);
 
 extern const char _DirToFlags[];
 #define CompassToWallFlags(d) _DirToFlags[d]

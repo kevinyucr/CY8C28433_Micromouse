@@ -31,8 +31,8 @@ void Nav_Update(void)
 		
 		//Nav_RandomWander2();
 		//Nav_FloodFill2();
-		Nav_FloodFill();
-		//Nav_RightWall();
+		//Nav_FloodFill();
+		Nav_RightWall();
 	}
 
 }
@@ -254,8 +254,9 @@ void Nav_FloodFill(void)
 
 void Nav_RightWall(void)
 {
-	if (Motion_Done() && Maze_IsFlooded())
+	if (Motion_Done()/* && Maze_IsFlooded()*/)
 	{
+		Motion_MapAtCurrPos();
 		if (R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
 		else if (F_OPEN) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
 		else Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
