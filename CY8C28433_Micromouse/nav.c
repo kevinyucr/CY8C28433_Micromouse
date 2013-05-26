@@ -31,8 +31,8 @@ void Nav_Update(void)
 		
 		//Nav_RandomWander2();
 		//Nav_FloodFill2();
-		//Nav_FloodFill();
-		Nav_RightWall();
+		Nav_FloodFill();
+		//Nav_RightWall();
 	}
 
 }
@@ -208,47 +208,68 @@ void Nav_FloodFill(void)
 	{
 		unsigned char this_value;
 		unsigned char min_value;
-				
-		Motion_MapAtCurrPos();
-		LED_All_Off();
-		if (wallExistsInMouseRelative(MOUSE_FRONT)) LED_Front_On();
-		if (wallExistsInMouseRelative(MOUSE_LEFT)) LED_Left_On();
-		if (wallExistsInMouseRelative(MOUSE_RIGHT)) LED_Right_On();
-		Maze_BeginFlood();
-		while (!Maze_IsFlooded)
-		{
-			Maze_FloodStep();
-		}
-		TX8_BT_CPutString("Route: ");
-		TX8_BT_PutSHexByte(mazeRouting[Mouse_Position]);
-		TX8_BT_CPutString("\r\n");
-				
-		this_value = mazeFlags[Mouse_Position];
+	
+		LED_ShowWalls();
 		
+		Motion_MapAtCurrPos();
+		
+		Maze_BeginFlood();
+		while (!Maze_IsFlooded()) Maze_FloodStep();
+		Maze_Print();
+		
+		this_value = mazeFlags[Mouse_Position];
+		/*
 		if (F_OPEN &&
 			mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value)
 		{
 			Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
-			TX8_BT_CPutString("NAV: Forward\r\n");
-		}	
-		else if (L_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
-		{
-			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
-			TX8_BT_CPutString("NAV: Left\r\n");
+			TX8_BT_CPutString("NAV: Forward to ");
+			TX8_BT_PutSHexByte(CellInMouseRel(MOUSE_FRONT));
+			TX8_BT_PutCRLF();
 		}	
 		else if (R_OPEN &&
 			mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value)
 		{
 			Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
 			TX8_BT_CPutString("NAV: Right\r\n");
+		}
+		else if (L_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			TX8_BT_CPutString("NAV: Left\r\n");
 		}	
 		else  // dead end, turn around
 		{
 			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
 			TX8_BT_CPutString("NAV: Dead-end\r\n");
 		}
-
+		*/
+		if (F_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
+			TX8_BT_CPutString("NAV: Forward to ");
+			TX8_BT_PutSHexByte(CellInMouseRel(MOUSE_FRONT));
+			TX8_BT_PutCRLF();
+		}	
+		else if (R_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			TX8_BT_CPutString("NAV: Right\r\n");
+		}
+		else if (L_OPEN &&
+			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			TX8_BT_CPutString("NAV: Left\r\n");
+		}	
+		else  // dead end, turn around
+		{
+			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			TX8_BT_CPutString("NAV: Dead-end\r\n");
+		}
 	}
 }
 
@@ -257,6 +278,11 @@ void Nav_RightWall(void)
 	if (Motion_Done()/* && Maze_IsFlooded()*/)
 	{
 		Motion_MapAtCurrPos();
+		
+		Maze_BeginFlood();
+		while (!Maze_IsFlooded()) Maze_FloodStep();
+		Maze_Print();
+				
 		if (R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
 		else if (F_OPEN) Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
 		else Motion_SetNextCommand(MOTION_COMMAND_LEFT90);

@@ -95,8 +95,6 @@ void Motion_MapAtCurrPos(void)
 	TX8_BT_CPutString("Mouse Direction: ");
 	Maze_PrintCompass(Mouse_Direction);
 	TX8_BT_PutCRLF();
-	
-	Maze_Print();
 }
 
 void _Motion_CommandForward(void)
@@ -193,8 +191,8 @@ void _Motion_CommandForwardFollow(void)
 {
 	int difference;
 // 230
-	if ( (adcIRFront >  100 && adcIRFront < 380) ||
-	     (adcIRFront <= 100 && motorSetpoint.right < MOTION_COUNT_CELL) )
+	if ( (adcIRFront >  200 && adcIRFront < 380) ||
+	     (adcIRFront <= 200 && motorSetpoint.right < MOTION_COUNT_CELL) )
 	{
 	
 		motorSetpoint.right += MOTION_BASE_VELOCITY;
@@ -212,17 +210,17 @@ void _Motion_CommandForwardFollow(void)
 		{
 			LED_Left_On();
 			if (adcIRLeft > 450)
-				motorSetpoint.right -= (adcIRLeft - 450) / 50;
+				motorSetpoint.right -= (adcIRLeft - 600) / 100;
 			else
-				motorSetpoint.left -= (450 - adcIRLeft) / 50;
+				motorSetpoint.left -= (600 - adcIRLeft) / 100;
 		}
 		else if (ADC_RightWallExists)
 		{
 			LED_Right_On();
 			if (adcIRRight > 450)
-				motorSetpoint.left -= (adcIRRight - 450) / 50;
+				motorSetpoint.left -= (adcIRRight - 600) / 100;
 			else
-				motorSetpoint.right -= (450 - adcIRRight) / 50;
+				motorSetpoint.right -= (600 - adcIRRight) / 100;
 		}
 		
 	}

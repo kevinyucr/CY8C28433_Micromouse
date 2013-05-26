@@ -1,7 +1,7 @@
 #include "ui.h"
 
 //#define DEBUG_BINARY
-//#define DEBUG_TEXT
+#define DEBUG_TEXT
 
 void LED_Init(void)
 {
