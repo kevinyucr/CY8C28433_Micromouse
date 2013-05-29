@@ -21,6 +21,7 @@ const char _navCommandList[] = {MOTION_COMMAND_FWDFOLLOW};
 							  
 void Nav_Init(void)
 {
+	
 }
 
 void Nav_Update(void)
@@ -106,10 +107,15 @@ void Nav_RandomWander1(void)
 		}
 	}	
 }
-
+/*
 #define L_OPEN (!ADC_LeftWallExists)
 #define R_OPEN (!ADC_RightWallExists)
 #define F_OPEN (!ADC_FrontWallExists)
+*/
+
+#define L_OPEN (!cellWallExists(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_LEFT, Mouse_Direction))))
+#define R_OPEN (!cellWallExists(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_RIGHT, Mouse_Direction))))
+#define F_OPEN (!cellWallExists(Mouse_Position, CompassToWallFlags(MouseToCompass(MOUSE_FRONT, Mouse_Direction))))
 
 void Nav_RandomWander2(void)
 {
@@ -204,23 +210,40 @@ void Nav_FloodFill2(void)
 void Nav_FloodFill(void)
 {
 	// Go forward. Turn when blocked, picking a random direction
-	if (Motion_Done())
+	if (Motion_Done() && Maze_IsFlooded())
 	{
 		unsigned char this_value;
 		unsigned char min_value;
 	
-		LED_ShowWalls();
+		//LED_ShowWalls();
 		
-		Motion_MapAtCurrPos();
-		
-		Maze_BeginFlood();
-		while (!Maze_IsFlooded()) Maze_FloodStep();
 		Maze_Print();
 		
-		this_value = mazeFlags[Mouse_Position];
-		/*
+		this_value = mazeRouting[Mouse_Position];
+		
+		if (F_OPEN)
+		{
+			TX8_BT_CPutString("NAV: Front is open - ");
+			TX8_BT_PutSHexByte(CellInMouseRel(MOUSE_FRONT));
+			TX8_BT_PutSHexByte(mazeRouting[CellInMouseRel(MOUSE_FRONT)]);
+			TX8_BT_PutCRLF();
+		}
+		if (L_OPEN)
+		{
+			TX8_BT_CPutString("NAV: Left is open - ");
+			TX8_BT_PutSHexByte(mazeRouting[CellInMouseRel(MOUSE_LEFT)]);
+			TX8_BT_PutCRLF();
+		}
+		if (R_OPEN)
+		{
+			TX8_BT_CPutString("NAV: Right is open - ");
+			TX8_BT_PutSHexByte(mazeRouting[CellInMouseRel(MOUSE_RIGHT)]);
+			TX8_BT_PutCRLF();
+		}
+		
+		
 		if (F_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value)
+			(mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value))
 		{
 			Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
 			TX8_BT_CPutString("NAV: Forward to ");
@@ -228,15 +251,15 @@ void Nav_FloodFill(void)
 			TX8_BT_PutCRLF();
 		}	
 		else if (R_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value)
+			(mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value))
 		{
-			Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
+			Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));
 			TX8_BT_CPutString("NAV: Right\r\n");
 		}
 		else if (L_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
+			(mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value))
 		{
-			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
+			Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_LEFT90));
 			TX8_BT_CPutString("NAV: Left\r\n");
 		}	
 		else  // dead end, turn around
@@ -244,43 +267,19 @@ void Nav_FloodFill(void)
 			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
 			TX8_BT_CPutString("NAV: Dead-end\r\n");
 		}
-		*/
-		if (F_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_FRONT)] < this_value)
-		{
-			Motion_SetNextCommand(MOTION_COMMAND_FWDFOLLOW);
-			TX8_BT_CPutString("NAV: Forward to ");
-			TX8_BT_PutSHexByte(CellInMouseRel(MOUSE_FRONT));
-			TX8_BT_PutCRLF();
-		}	
-		else if (R_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_RIGHT)] < this_value)
-		{
-			Motion_SetNextCommand(MOTION_COMMAND_RIGHT90);
-			TX8_BT_CPutString("NAV: Right\r\n");
-		}
-		else if (L_OPEN &&
-			mazeRouting[CellInMouseRel(MOUSE_LEFT)] < this_value)
-		{
-			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
-			TX8_BT_CPutString("NAV: Left\r\n");
-		}	
-		else  // dead end, turn around
-		{
-			Motion_SetNextCommand(MOTION_COMMAND_LEFT90);
-			TX8_BT_CPutString("NAV: Dead-end\r\n");
-		}
+		
+		TX8_BT_PutCRLF();
 	}
 }
 
 void Nav_RightWall(void)
 {
-	if (Motion_Done()/* && Maze_IsFlooded()*/)
+	if (Motion_Done() && Maze_IsFlooded())
 	{
 		Motion_MapAtCurrPos();
 		
-		Maze_BeginFlood();
-		while (!Maze_IsFlooded()) Maze_FloodStep();
+		//Maze_BeginFlood();
+		//while (!Maze_IsFlooded()) Maze_FloodStep();
 		Maze_Print();
 				
 		if (R_OPEN) Motion_SetNextCommand(MOTION_APPEND_FWD(MOTION_COMMAND_RIGHT90));

@@ -47,17 +47,10 @@ void Maze_Init(void)
 	Maze_AddBorders();
 	//Maze_BeginFlood();
 
-	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_NORTH));
-	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_WEST));
-	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_SOUTH));
-	Maze_PrintCompass(MouseToCompass(MOUSE_FRONT, MOUSE_EAST));
-	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_NORTH));
-	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_WEST));
-	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_SOUTH));
-	Maze_PrintCompass(MouseToCompass(MOUSE_RIGHT, MOUSE_EAST));
-	
 	Mouse_Position = CELL_START;
 	Mouse_Direction = MOUSE_NORTH;
+	
+	Maze_BeginFlood();
 }
 
 void Maze_Clear(void)
@@ -120,6 +113,8 @@ void Maze_AddWall(CellIndex c, CompassRelative d)
 			cellSetFlags(adj, WALL_EAST);   // Set it's EAST wall
 		}
 	}
+	
+	Maze_BeginFlood();
 }
 
 // Adds walls along the maze edge
@@ -197,7 +192,7 @@ CellIndex Maze_Dequeue(void)
 
 BOOL Maze_IsFlooded(void)
 {
-	return !mazeFloodCount;
+	return (mazeFloodCount == 0);
 }
 
 void Maze_BeginFlood(void)
@@ -212,6 +207,12 @@ void Maze_BeginFlood(void)
 	cellClearFlags(MAZE_UPPER_RIGHT, CELL_IN_QUEUE);
 	
 	mazeRouting[CELL_CENTER] = 0;
+	
+	// Reset the flooding queue
+	mazeFloodHeadPointer = 0;
+	mazeFloodTailPointer = 0;
+	mazeFloodCount = 0;
+	
 	Maze_Enqueue(CELL_CENTER);
 }
 
@@ -242,9 +243,9 @@ void Maze_FloodStep(void)
 	if (!cellWallExists(c, WALL_EAST))  Maze_FloodCell(c + 1, level);
 	if (!cellWallExists(c, WALL_WEST))  Maze_FloodCell(c - 1, level);
 
-	//TX8_BT_CPutString("Fld: ");
-	//TX8_BT_PutSHexByte(c);
-	//TX8_BT_PutCRLF();
+	TX8_BT_CPutString("Fld: ");
+	TX8_BT_PutSHexByte(c);
+	TX8_BT_PutCRLF();
 }
 
 const char _DirToFlags[] = {WALL_WEST, WALL_SOUTH, WALL_EAST, WALL_NORTH};
@@ -423,6 +424,7 @@ void Maze_PrintCompass(CompassRelative d)
 
 #ifdef _WIN32
 
+// Old maze-drawing code used in Windows C++/CLI testbench
 void DrawMazeToFile(String^ filename, Byte maze[])
 {
     Bitmap^ b = gcnew Bitmap(16 * 16 + 1, 16 * 16 + 1);

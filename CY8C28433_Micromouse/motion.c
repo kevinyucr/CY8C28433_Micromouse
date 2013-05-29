@@ -67,7 +67,7 @@ void Motion_Update(void)
 	}
 }
 
-void Motion_MapAtCurrPos(void)
+void Motion_MapAtCurrPos(void)  // This should really go in the Maze module...
 {
 	CompassRelative walldir;
 	TX8_BT_CPutString("Mapped walls: ");
@@ -190,9 +190,9 @@ void _Motion_CommandForwardWait(void)
 void _Motion_CommandForwardFollow(void)
 {
 	int difference;
-// 230
-	if ( (adcIRFront >  200 && adcIRFront < 380) ||
-	     (adcIRFront <= 200 && motorSetpoint.right < MOTION_COUNT_CELL) )
+// 380
+	if ( (adcIRFront >  100 && adcIRFront < 380) ||
+	     (adcIRFront <= 100 && motorSetpoint.right < MOTION_COUNT_CELL) )
 	{
 	
 		motorSetpoint.right += MOTION_BASE_VELOCITY;
@@ -209,18 +209,18 @@ void _Motion_CommandForwardFollow(void)
 		else if (ADC_LeftWallExists)
 		{
 			LED_Left_On();
-			if (adcIRLeft > 450)
-				motorSetpoint.right -= (adcIRLeft - 600) / 100;
+			if (adcIRLeft > 550)
+				motorSetpoint.right -= (adcIRLeft - 550) / 50;
 			else
-				motorSetpoint.left -= (600 - adcIRLeft) / 100;
+				motorSetpoint.left -= (550 - adcIRLeft) / 50;
 		}
 		else if (ADC_RightWallExists)
 		{
 			LED_Right_On();
-			if (adcIRRight > 450)
-				motorSetpoint.left -= (adcIRRight - 600) / 100;
+			if (adcIRRight > 550)
+				motorSetpoint.left -= (adcIRRight - 550) / 50;
 			else
-				motorSetpoint.right -= (600 - adcIRRight) / 100;
+				motorSetpoint.right -= (550 - adcIRRight) / 50;
 		}
 		
 	}
@@ -244,6 +244,8 @@ void _Motion_CommandForwardFollow(void)
 			
 
 		}
+		
+		Motion_MapAtCurrPos();
 	}
 
 }
